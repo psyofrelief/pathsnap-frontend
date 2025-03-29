@@ -29,7 +29,7 @@
 }
 
 :root {
-  --background: hsl(0 0% 7%);
+  --background: hsl(0 0% 5%);
   --popover: hsl(0 0% 15%);
   --accent: hsl(212 100% 75%);
 

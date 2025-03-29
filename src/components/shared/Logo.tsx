@@ -10,7 +10,7 @@ export default function Logo({ className = "" }: Props) {
       viewBox="0 0 81 38"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`hover:fill-red fill-accent ${className}`}
     >
       <title>pzag logo</title>
       <path

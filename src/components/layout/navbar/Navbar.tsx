@@ -1,9 +1,9 @@
 "use client";
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
-import Logo from "../shared/Logo";
+import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -28,7 +28,7 @@ export default function Navbar() {
           </Link>
         </div>
       ) : (
-        <Button variant="outline" onClick={logout}>
+        <Button className="flex-0" variant="outline" onClick={logout}>
           Logout
         </Button>
       )}
