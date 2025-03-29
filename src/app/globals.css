@@ -2,7 +2,7 @@
 
 @theme inline {
   --color-background: var(--background);
-  --color-background-secondary: var(--background-secondary);
+  --color-popover: var(--popocer);
   --color-accent: var(--accent);
 
   --color-foreground: var(--foreground);
@@ -26,19 +26,19 @@
 }
 
 :root {
-  --background: hsl(45 20% 93%);
-  --background-secondary: hsl(45 20% 93%);
-  --accent: hsl(262 100% 50%);
+  --background: hsl(0 0% 7%);
+  --popover: hsl(0 0% 15%);
+  --accent: hsl(212 100% 75%);
 
-  --foreground: hsl(45 20% 2%);
-  --foreground-secondary: hsl(45 20% 24%);
-  --foreground-accent: hsl(45 20% 100%);
+  --foreground: hsl(0 0% 90%);
+  --foreground-secondary: hsl(0 0% 70%);
+  --foreground-accent: hsl(0 0% 7%);
 
-  --outline: hsl(45 20% 75%);
+  --outline: hsl(0 0% 15%);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "DM Sans", Helvetica, sans-serif;
+  font-family: "Inter", Aria, sans-serif;
 }
