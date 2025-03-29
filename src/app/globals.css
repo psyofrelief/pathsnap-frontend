@@ -23,6 +23,8 @@
   --spacing-xl: 48px;
   --spacing-2xl: 64px;
 
+  --spacing-screen-minus-navbar: calc(100vh - 74px);
+
   --font-sans: var(--font-dm-sans);
 }
 
@@ -42,4 +44,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Inter", Aria, sans-serif;
+}
+
+a,
+button {
+  cursor: pointer;
 }
