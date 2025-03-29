@@ -2,22 +2,34 @@
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
 import Logo from "../shared/Logo";
+import NavLink from "./NavLink";
+import Button from "../ui/Button";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   return (
-    <nav className="flex justify-between px-md py-sm">
-      <Logo />
+    <nav className="flex justify-between items-center px-md py-sm">
+      <div className="flex gap-x-md">
+        <Logo />
+        <ul className="gap-x-sm flex items-center">
+          <NavLink label="FAQ" href="." />
+          <NavLink label="Support" href="/support" />
+        </ul>
+      </div>
       {!user ? (
-        <>
-          <Link href={"/login"}>Login</Link>
+        <div className="flex gap-sm items-center">
+          <Button variant="outline">
+            <Link href={"/login"}>Login</Link>
+          </Button>
 
-          <Link href={"/register"}>Sign up</Link>
-        </>
+          <Button>
+            <Link href={"/register"}>Sign up</Link>
+          </Button>
+        </div>
       ) : (
-        <button onClick={logout} type="button">
+        <Button variant="outline" onClick={logout}>
           Logout
-        </button>
+        </Button>
       )}
     </nav>
   );

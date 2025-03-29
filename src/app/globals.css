@@ -2,8 +2,9 @@
 
 @theme inline {
   --color-background: var(--background);
-  --color-popover: var(--popocer);
+  --color-popover: var(--popover);
   --color-accent: var(--accent);
+  --color-outline: var(--outline);
 
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);

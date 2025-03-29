@@ -8,7 +8,9 @@ interface Props {
 export default function NavLink({ href, label }: Props) {
   return (
     <li className="flex">
-      <Link href={href}>{label}</Link>
+      <Link className="flex-1 hover:underline" href={href}>
+        {label}
+      </Link>
     </li>
   );
 }
