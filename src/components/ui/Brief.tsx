@@ -6,5 +6,9 @@ interface Props {
 }
 
 export default function Brief({ children, className = "" }: Props) {
-  return <p className={cn("text-md sm:text-lg", className)}>{children}</p>;
+  return (
+    <p className={cn("text-md sm:text-lg font-semibold", className)}>
+      {children}
+    </p>
+  );
 }

@@ -4,9 +4,14 @@ import Link from "next/link";
 import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
+import { useEffect } from "react";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth({ middleware: "auth" });
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <nav className="flex justify-between items-center px-md py-sm">
       <div className="flex gap-x-md">
@@ -15,6 +20,7 @@ export default function Navbar() {
           <NavLink label="About us" href="/about" />
           <NavLink label="FAQ" href="." />
           <NavLink label="Support" href="/support" />
+          {user && <NavLink label="Links" href="/links" />}
         </ul>
       </div>
       {!user ? (

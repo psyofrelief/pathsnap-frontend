@@ -1,9 +1,9 @@
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  type: string;
+  type?: string;
   placeholder: string;
 }
 
-export default function Input({ type, placeholder, ...props }: Props) {
+export default function Input({ type = "text", placeholder, ...props }: Props) {
   return (
     <input
       type={type}

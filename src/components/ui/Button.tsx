@@ -18,7 +18,7 @@ export default function Button({
     <button
       type={type}
       className={cn(
-        "font-medium flex-1 rounded transition-colors justify-center px-sm py-xs size-fit",
+        "font-medium flex-1 rounded whitespace-nowrap transition-colors justify-center px-sm py-xs size-fit",
         variant === "primary"
           ? "bg-accent text-foreground-accent hover:bg-foreground"
           : "border border-outline text-foreground hover:bg-popover",

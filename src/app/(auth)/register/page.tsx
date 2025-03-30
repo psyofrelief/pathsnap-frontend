@@ -14,7 +14,7 @@ import Section from "@/components/ui/Section";
 const Page = () => {
   const { register } = useAuth({
     middleware: "guest",
-    redirectIfAuthenticated: "/dashboard",
+    redirectIfAuthenticated: "/",
   });
 
   const [name, setName] = useState("");
@@ -36,14 +36,14 @@ const Page = () => {
   };
 
   return (
-    <Section className="items-center justify-center flex-1 gap-lg relative">
-      <Brief>Login to your account</Brief>
+    <Section className="items-center justify-center flex-1 gap-y-sm sm:!py-md relative">
+      <Brief>Sign up for an account</Brief>
       <RegisterForm />
-      <p>
-        Dont have an account?{" "}
+      <p className="z-[1]">
+        Already have an account?{" "}
         <span>
-          <Link className="underline underline-offset-4" href={"/register"}>
-            Sign Up
+          <Link className="underline underline-offset-4" href={"/login"}>
+            Login
           </Link>
         </span>
       </p>

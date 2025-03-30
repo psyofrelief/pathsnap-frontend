@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,6 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Link from "next/link";
 import { useAuth } from "@/hooks/auth";
-
 const formSchema = z.object({
   email: z.string().email({ message: "Enter a valid email" }),
   password: z
@@ -39,9 +37,7 @@ export default function LoginForm() {
     >
       {/* Email Field */}
       <div className="flex flex-col gap-y-xs">
-        <Label htmlFor="email" className="font-medium">
-          Email
-        </Label>
+        <Label htmlFor="email">Email</Label>
         <Input
           placeholder="Your email"
           id="email"
@@ -67,7 +63,6 @@ export default function LoginForm() {
 
       <Link href={"/forgot-password"}>Forgot your password?</Link>
 
-      {/* Submit Button */}
       <Button type="submit" className="w-full">
         Login
       </Button>

@@ -36,7 +36,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     axios
       .post("/register", props)
       .then((data) => {
-        console.log(data);
+        router.push("/verify-email");
         return mutate();
       })
       .catch((error) => {

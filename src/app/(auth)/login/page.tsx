@@ -112,16 +112,13 @@ export default function Login() {
   //   </>
   // );
   return (
-    <Section className="items-center justify-center flex-1 gap-lg relative">
+    <Section className="items-center justify-center flex-1 gap-y-sm sm:!py-md relative">
       <Brief>Login to your account</Brief>
       <LoginForm />
-      <p>
+      <p className="z-[1]">
         Dont have an account?{" "}
         <span>
-          <Link
-            className="underline z-[99] underline-offset-4"
-            href={"/register"}
-          >
+          <Link className="underline   underline-offset-4" href={"/register"}>
             Sign Up
           </Link>
         </span>
