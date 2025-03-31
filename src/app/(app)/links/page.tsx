@@ -13,7 +13,7 @@ interface Link {
   short_url: string;
   url: string;
   qr_code: string;
-  clicks: string;
+  clicks: number;
   created_at: string;
 }
 
