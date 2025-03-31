@@ -6,6 +6,7 @@ import LinkCardButton from "./LinkCardButton";
 import ClickIcon from "../icons/ClickIcon";
 import ArrowDownRightIcon from "../icons/ArrowDownRight";
 import { toast } from "sonner";
+import EditLinkDialog from "../forms/EditLinkForm";
 
 interface Link {
   id: string;
@@ -91,9 +92,8 @@ export default function LinkCard({ link }: LinkProps) {
           <LinkCardButton>
             <QrCodeIcon />
           </LinkCardButton>
-          <LinkCardButton>
-            <EditIcon />
-          </LinkCardButton>
+
+          <EditLinkDialog link={link} />
         </div>
       </div>
 

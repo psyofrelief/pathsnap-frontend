@@ -39,7 +39,9 @@ export const useLinks = () => {
   const updateLink = async (id, updatedData) => {
     try {
       const response = await axios.put(`/api/short-links/${id}`, updatedData);
-      mutate(); // Refresh the links list
+      mutate();
+
+      // router.refresh();
       return response.data;
     } catch (error) {
       console.error("Error updating link:", error);

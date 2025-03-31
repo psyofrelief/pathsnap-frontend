@@ -18,12 +18,11 @@ interface Link {
 }
 
 export default function LinksPage() {
-  const [links, setLinks] = useState<Link[] | null>(null);
-  const { getLinks } = useLinks();
+  const { getLinks, links } = useLinks();
 
-  useEffect(() => {
-    getLinks(setLinks);
-  }, []);
+  // useEffect(() => {
+  //   getLinks(setLinks);
+  // }, []);
   useEffect(() => {
     console.log(links);
   }, [links]);
@@ -43,7 +42,7 @@ export default function LinksPage() {
       </div>
 
       <ul className="flex flex-col gap-y-md items-center">
-        {links.map((link) => (
+        {links.map((link: any) => (
           <LinkCard key={link.id} link={link} />
         ))}
       </ul>

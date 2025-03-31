@@ -4,6 +4,7 @@
   --color-background: var(--background);
   --color-popover: var(--popover);
   --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
   --color-outline: var(--outline);
 
   --color-foreground: var(--foreground);
@@ -32,6 +33,7 @@
   --background: hsl(0 0% 5%);
   --popover: hsl(0 0% 15%);
   --accent: hsl(20 0% 85%);
+  --destructive: hsl(0 100% 35%);
 
   --foreground: hsl(0 0% 90%);
   --foreground-secondary: hsl(0 0% 70%);
