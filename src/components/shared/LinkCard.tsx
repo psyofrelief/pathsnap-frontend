@@ -5,6 +5,7 @@ import EditIcon from "../icons/EditIcon";
 import LinkCardButton from "./LinkCardButton";
 import ClickIcon from "../icons/ClickIcon";
 import ArrowDownRightIcon from "../icons/ArrowDownRight";
+import { toast } from "sonner";
 
 interface Link {
   id: string;
@@ -31,6 +32,15 @@ export default function LinkCard({ link }: LinkProps) {
     day: "numeric",
     year: "numeric",
   }).format(new Date(created_at));
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast("Copied to clipboard");
+    } catch (err) {
+      toast(`Failed to copy: ${err}`);
+    }
+  };
 
   return (
     <li className="p-md max-w-[800px] w-full rounded border border-outline flex flex-col gap-md">
@@ -64,7 +74,18 @@ export default function LinkCard({ link }: LinkProps) {
         </div>
 
         <div className="flex gap-xs">
-          <LinkCardButton>Copy</LinkCardButton>
+          <LinkCardButton
+            onClick={() => {
+              const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+              if (!backendUrl) {
+                console.error("Backend URL is not defined");
+                return;
+              }
+              copyToClipboard(`${backendUrl}/${short_url}`);
+            }}
+          >
+            Copy
+          </LinkCardButton>
           <LinkCardButton>Share</LinkCardButton>
 
           <LinkCardButton>

@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/navbar/Navbar";
+import { Toaster } from "@/components/ui/Sonner";
 
 export default function RootLayout({
   children,
@@ -7,6 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
+      <Toaster />
       <Navbar />
       {children}
     </>

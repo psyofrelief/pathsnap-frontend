@@ -11,17 +11,17 @@ export default function ArrowDownRightIcon() {
       <polyline
         fill="none"
         stroke="var(--foreground-secondary)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="12"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="12"
         points="160 128 208 176 160 224"
       />
       <polyline
         fill="none"
         stroke="var(--foreground-secondary)"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="12"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="12"
         points="64 32 64 176 208 176"
       />
     </svg>
