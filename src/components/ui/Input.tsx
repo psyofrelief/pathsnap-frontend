@@ -1,4 +1,4 @@
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   placeholder: string;
 }
