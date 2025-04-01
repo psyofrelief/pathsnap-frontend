@@ -28,7 +28,12 @@ export default function LinksPage() {
   }, [links]);
 
   if (!links || links.length === 0) {
-    return <p>No links</p>;
+    return (
+      <p>
+        {/*<CreateLinkDialog />*/}
+        ss
+      </p>
+    );
   }
 
   return (

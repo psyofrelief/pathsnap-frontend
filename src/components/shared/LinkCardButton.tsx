@@ -6,7 +6,7 @@ export default function LinkCardButton({ children, ...props }: Props) {
   return (
     <button
       type="button"
-      className="rounded-full h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors"
+      className="rounded-full w-full whitespace-nowrap h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors"
       {...props}
     >
       {children}
