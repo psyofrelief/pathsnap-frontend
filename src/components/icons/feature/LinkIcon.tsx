@@ -6,7 +6,7 @@ export default function LinkIcon() {
       viewBox="0 0 64 65"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="size-[80px]"
+      className="size-[40px]"
     >
       <title>Link Icon</title>
       <g clipPath="url(#clip0_125_542)">

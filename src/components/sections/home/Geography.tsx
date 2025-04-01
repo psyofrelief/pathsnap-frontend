@@ -7,23 +7,23 @@ import Image from "next/image";
 
 export default function Geography() {
   return (
-    <Section className="justify-between flex-row border-t border-t-outline min-h-screen">
-      <div className="flex flex-col gap-[100px] my-auto">
-        <header className="flex flex-col">
+    <Section className="justify-between bg-radial  from-accent/20 via-background to-background items-center bordet border-t-outline min-h-screen">
+      <div className="flex flex-col gap-[100px] items-center my-auto">
+        <header className="flex flex-col items-center">
           <Brief>
             Built to <em className="font-light">scale</em>
           </Brief>
-          <p>
+          <p className="max-w-[460px] text-center">
             Whether you need millions of links or billions of clicks, we've got
             you covered. We’re not bound by geography so tap in today.
           </p>
-          <Link href={"/register"} className="flex w-fit">
-            <Button className="mt-md">Get started</Button>
+          <Link href={"/register"} className="flex w-full">
+            <Button className="mt-md flex-1 w-full"> Try for free</Button>
           </Link>
         </header>
 
-        <div className="flex flex-col gap-xs">
-          <p className="text-foreground-secondary">
+        <div className="flex flex-col items-center gap-sm">
+          <p className="text-foreground-secondary text-center">
             We’ve shortened hundreds links from these countries:
           </p>
           <ul className="flex flex-wrap gap-xs">
@@ -35,14 +35,14 @@ export default function Geography() {
           </ul>
         </div>
       </div>
-
+      {/*
       <Image
         src={"/images/globe.jpg"}
         className="mix-blend-lighten aspect-square  size-[500px] my-auto"
         height={1000}
         width={1000}
         alt="Globe"
-      />
+      />*/}
     </Section>
   );
 }

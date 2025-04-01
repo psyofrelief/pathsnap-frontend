@@ -18,7 +18,6 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const { createLink } = useLinks();
-  const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -41,13 +40,12 @@ export default function ContactForm() {
 
     createLink(linkData);
     reset();
-    setOpen(false);
   }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-1 flex-col w-full border border-outline p-md max-w-[800px] gap-y-4"
+      className="flex flex-1 bg-background flex-col w-full border border-outline p-md max-w-[800px] gap-y-4"
     >
       <div className="flex flex-col gap-2">
         <Label htmlFor="name">Name</Label>

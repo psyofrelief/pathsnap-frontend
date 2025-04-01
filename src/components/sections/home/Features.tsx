@@ -15,26 +15,24 @@ import Image from "next/image";
 
 export default function Features() {
   return (
-    <Section className="border-t border-t-outline  items-center flex-row gap-x-lg grid-cols-2">
-      <div className="flex flex-col gap-y-xl max-w-[640px]">
-        <ul className="flex flex-col gap-y-sm">
-          {features.map((e) => (
-            <FeatureCard
-              icon={e.icon}
-              title={e.title}
-              key={e.title}
-              desc={e.desc}
-            />
-          ))}
-        </ul>
-      </div>
-      <Image
-        src={"/images/feature_image.png"}
-        height={500}
-        width={430}
-        alt="fff"
-        className="mix-blend-lighten mx-auto"
-      />
+    <Section className="bg-background border-t-outline  items-center  gap-y-xl ">
+      <header className="flex flex-col items-center">
+        <Brief className=" text-center max-w-[950px]">
+          More than just a URL shortener—unlock powerful analytics, custom
+          branding, and seamless sharing to elevate your online presence.
+        </Brief>
+      </header>
+
+      <ul className="flex w-full gap-sm">
+        {features.map((e) => (
+          <FeatureCard
+            icon={e.icon}
+            title={e.title}
+            key={e.title}
+            desc={e.desc}
+          />
+        ))}
+      </ul>
     </Section>
   );
 }

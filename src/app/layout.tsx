@@ -1,10 +1,37 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const lastik = localFont({
+  src: [
+    {
+      path: "../../public/fonts/lastik/Lastik-Regular.otf",
+      style: "normal",
+    },
+  ],
+  variable: "--font-lastik",
+  display: "swap",
+});
+const nacelle = localFont({
+  src: [
+    {
+      path: "../../public/fonts/nacelle/Nacelle-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "/../../public/fonts/nacelle/Nacelle-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "/../../public/fonts/nacelle/Nacelle-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-nacelle",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} antialiased min-h-screen flex flex-col bg-background`}
+        className={`${nacelle.variable} ${lastik.variable} antialiased min-h-screen flex flex-col bg-background`}
       >
         {children}
       </body>

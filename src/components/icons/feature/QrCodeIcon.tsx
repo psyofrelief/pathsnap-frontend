@@ -6,7 +6,7 @@ export default function QrCodeIcon() {
       viewBox="0 0 40 41"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="size-[80px]"
+      className="size-[40px]"
     >
       <title>Qr Code Icon</title>
       <g clipPath="url(#clip0_132_452)">

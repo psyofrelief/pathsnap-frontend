@@ -13,10 +13,10 @@ import { faqs } from "@/data/faqs";
 
 export default function Faq() {
   return (
-    <Section className="border-t border-t-outline gap-y-lg">
-      <header>
-        <Heading>Frequently Asked Questions</Heading>
-        <Brief>What would you like to know about Pzag?</Brief>
+    <Section className="borde bg-background border-t-outline gap-y-lg">
+      <header className="flex flex-col items-center">
+        <Brief>Frequently Asked Questions</Brief>
+        <p>What would you like to know about Pzag?</p>
       </header>
       <Accordion
         type="single"

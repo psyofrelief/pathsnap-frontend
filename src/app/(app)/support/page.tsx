@@ -5,7 +5,7 @@ import Section from "@/components/ui/Section";
 
 export default function SupportPage() {
   return (
-    <Section className="justify-center items-center gap-y-lg">
+    <Section className="justify-center bg-radial from-accent to-background via-background items-center gap-y-lg">
       <header className="flex flex-col items-center">
         <Heading>Support</Heading>
         <Brief>Need assistance? Send us a message</Brief>

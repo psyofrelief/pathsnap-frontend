@@ -28,7 +28,7 @@ interface Feature {
 
 export default function FeatureCard({ icon, title, desc }: Feature) {
   return (
-    <li className="flex bg-popover rounded p-md items-center gap-md border border-outline">
+    <li className="flex flex-col  bg-popover rounded p-md  gap-md borde border-outline">
       {icon}
       <header>
         <p className="font-semibold">{title}</p>

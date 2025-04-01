@@ -112,7 +112,7 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
             )}
           </div>
           <div className="flex gap-sm">
-            <Button type="submit" className="w-full">
+            <Button variant="outline" type="submit" className="w-full">
               Save Changes
             </Button>
             <Button

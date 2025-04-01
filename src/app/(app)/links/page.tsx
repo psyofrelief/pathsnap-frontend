@@ -18,11 +18,8 @@ interface Link {
 }
 
 export default function LinksPage() {
-  const { getLinks, links } = useLinks();
+  const { links } = useLinks();
 
-  // useEffect(() => {
-  //   getLinks(setLinks);
-  // }, []);
   useEffect(() => {
     console.log(links);
   }, [links]);
@@ -37,7 +34,7 @@ export default function LinksPage() {
   }
 
   return (
-    <Section className="gap-y-xl">
+    <Section className="gap-y-xl bg-radial from-accent/20 to-background via-background">
       <div className="flex flex-col items-center gap-sm">
         <header className="flex flex-col items-center">
           <Heading>Your links</Heading>

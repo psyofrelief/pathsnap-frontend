@@ -6,7 +6,7 @@ export default function AnalyticsIcon() {
       viewBox="0 0 56 57"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="size-[80px]"
+      className="size-[40px]"
     >
       <title>Analytics Icon</title>
       <g clipPath="url(#clip0_125_539)">

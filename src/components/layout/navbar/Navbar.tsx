@@ -13,16 +13,16 @@ export default function Navbar() {
     console.log(user);
   }, [user]);
   return (
-    <nav className="flex justify-between items-center px-md py-sm">
-      <div className="flex gap-x-md">
+    <nav className="flex z-[1] bg-background justify-between items-center px-md py-sm">
+      <div className="flex gap-x-md items-center">
         <Link href={"/"}>
           <Logo />
         </Link>
+        <div className="h-md w-[2px] bg-outline" />
         <ul className="gap-x-sm flex items-center">
-          <NavLink label="About us" href="/about" />
+          {user && <NavLink label="Links" href="/links" />}
           <NavLink label="FAQ" href="." />
           <NavLink label="Support" href="/support" />
-          {user && <NavLink label="Links" href="/links" />}
         </ul>
       </div>
       {!user ? (

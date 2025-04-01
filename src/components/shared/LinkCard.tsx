@@ -46,7 +46,7 @@ export default function LinkCard({ link }: LinkProps) {
   };
 
   return (
-    <li className="p-md max-w-[800px] w-full rounded border border-outline flex flex-col gap-md">
+    <li className="p-md bg-background max-w-[800px] w-full rounded border border-outline flex flex-col gap-md">
       <div className="flex justify-between">
         <div className="flex gap-md">
           {/* Favicon */}
