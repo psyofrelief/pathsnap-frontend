@@ -15,7 +15,9 @@ export default function Navbar() {
   return (
     <nav className="flex justify-between items-center px-md py-sm">
       <div className="flex gap-x-md">
-        <Logo />
+        <Link href={"/"}>
+          <Logo />
+        </Link>
         <ul className="gap-x-sm flex items-center">
           <NavLink label="About us" href="/about" />
           <NavLink label="FAQ" href="." />
