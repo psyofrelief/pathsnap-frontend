@@ -13,9 +13,17 @@ export default function Hero() {
           links, generate customisable QR codes, build link in bio pages, and
           run interactive surveys.
         </p>
-        <Link href={"/register"} className="flex-1 flex mt-md">
-          <Button>Get started for free</Button>
-        </Link>
+        <div className="flex gap-sm">
+          <Link href={"/register"} className="flex-1 flex mt-md">
+            <Button>Get started</Button>
+          </Link>
+          <Link
+            href={"https://github.com/psyofrelief/pzag-frontend"}
+            className="flex-1 flex mt-md"
+          >
+            <Button variant="outline">Source Code</Button>
+          </Link>
+        </div>
       </header>
     </Section>
   );

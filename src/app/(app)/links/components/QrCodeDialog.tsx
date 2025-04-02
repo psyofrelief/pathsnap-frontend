@@ -34,7 +34,7 @@ export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
       <DialogContent className="w-fit items-center flex flex-col">
         <Pill>{`${backendUrl}/${shortUrl}`}</Pill>
         <DialogHeader>
-          <DialogTitle>Your QR Code</DialogTitle>
+          <DialogTitle className="font-lastik">Your QR Code</DialogTitle>
         </DialogHeader>
         <div className="aspect-square p-lg rounded bg-white">
           <Image

@@ -23,7 +23,7 @@ export default function Button({
           ? "bg-accent text-foreground-accent hover:bg-foreground"
           : variant === "destructive"
             ? "bg-destructive text-foreground"
-            : "border border-outline text-foreground hover:bg-popover",
+            : "border bg-background border-outline text-foreground hover:bg-popover",
         className,
       )}
       {...props} // Spread any additional props

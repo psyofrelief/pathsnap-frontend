@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/navbar/Navbar";
 import { Toaster } from "@/components/ui/Sonner";
 import Image from "next/image";
@@ -19,6 +20,7 @@ export default function RootLayout({
       <Toaster />
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 }

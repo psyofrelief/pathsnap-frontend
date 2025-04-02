@@ -7,7 +7,7 @@ export default function Input({ type = "text", placeholder, ...props }: Props) {
   return (
     <input
       type={type}
-      className="bg-background outline-none border border-outline ring-0 rounded  p-sm w-full placeholder:text-foreground-secondary"
+      className="bg-background outline-none border border-outline ring-accent focus:ring rounded  p-sm w-full placeholder:text-foreground-secondary"
       placeholder={placeholder}
       {...props}
     />

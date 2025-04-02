@@ -15,7 +15,7 @@ export default function Layout({
 }>) {
   return (
     <div className="flex flex-col flex-1 relative justify-center">
-      <Link href={"/"} className="flex m-md absolute top-sm left-lg z-[1]">
+      <Link href={"/"} className="flex m-md absolute top-sm left-lg z-[99]">
         <Logo />
       </Link>
       {children}
