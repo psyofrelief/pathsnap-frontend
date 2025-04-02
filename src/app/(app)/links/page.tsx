@@ -6,22 +6,8 @@ import { useLinks } from "@/hooks/links";
 import { useEffect, useState } from "react";
 import LinkCard from "@/components/shared/LinkCard";
 
-interface Link {
-  id: string;
-  title?: string;
-  short_url: string;
-  url: string;
-  qr_code: string;
-  clicks: number;
-  created_at: string;
-}
-
 export default function LinksPage() {
   const { links } = useLinks();
-
-  useEffect(() => {
-    console.log(links);
-  }, [links]);
 
   if (!links || links.length === 0) {
     return (

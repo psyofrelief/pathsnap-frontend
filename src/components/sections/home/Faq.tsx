@@ -1,8 +1,5 @@
-import Button from "@/components/ui/Button";
-import Link from "next/link";
 import Section from "@/components/ui/Section";
 import Brief from "@/components/ui/Brief";
-import Heading from "@/components/ui/Heading";
 import {
   Accordion,
   AccordionContent,
