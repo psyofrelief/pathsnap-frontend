@@ -1,13 +1,25 @@
 "use client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/DropdownMenu";
+
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
 import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import EditUserDialog from "@/components/forms/EditAccountForm";
 
 export default function Navbar() {
   const { user, logout } = useAuth({ middleware: "auth" });
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
 
   useEffect(() => {
     console.log(user);
@@ -36,9 +48,12 @@ export default function Navbar() {
           </Link>
         </div>
       ) : (
-        <Button className="flex-0" variant="outline" onClick={logout}>
-          Logout
-        </Button>
+        <div className="flex gap-x-sm items-center">
+          <EditUserDialog user={user} />
+          <Button className="flex-0" variant="outline" onClick={logout}>
+            Logout
+          </Button>
+        </div>
       )}
     </nav>
   );

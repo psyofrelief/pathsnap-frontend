@@ -110,6 +110,29 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     window.location.pathname = "/login";
   };
+  const updateUser = async (values) => {
+    await csrf();
+    try {
+      const response = await axios.put("/api/user", values);
+      mutate(); // Refresh user data
+      return response.data;
+    } catch (error) {
+      console.error("Error updating user:", error);
+      throw error;
+    }
+  };
+
+  const deleteUser = async () => {
+    await csrf();
+    try {
+      await axios.delete("/api/user");
+      mutate(null); // Clear user data
+      window.location.pathname = "/login"; // Redirect to login
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      throw error;
+    }
+  };
 
   useEffect(() => {
     if (middleware === "guest" && redirectIfAuthenticated && user)
@@ -128,6 +151,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     user,
     register,
     login,
+    updateUser,
+    deleteUser,
     forgotPassword,
     resetPassword,
     resendEmailVerification,
