@@ -12,16 +12,16 @@ export const features: Feature[] = [
   {
     icon: <LinkIcon />,
     title: "Custom Links",
-    desc: "Personalise your shortened links to match your brand or preferences. Create unique URLs that are easy to remember.",
+    desc: "Customize your shortened links to reflect your interests or brand. Make distinctive URLs that are simple to remember.",
   },
   {
     icon: <QrCodeIcon />,
     title: "QR Codes",
-    desc: "Generate custom QR codes for your shortened links. They are easily shareable and scannable for offline access and more.",
+    desc: "Generate unique QR codes for your abbreviated URLs. They can be scanned for offline access and are completely free.",
   },
   {
     icon: <AnalyticsIcon />,
     title: "Analytics",
-    desc: "Track the performance of your shortened links. Get insights on the amount of clicks your shortened links receive with 100% accuracy.",
+    desc: "Monitor how well your shortened links are doing. Get 100% accurate information about how many clicks your shortened links get.",
   },
 ];

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Section from "@/components/ui/Section";
 import Brief from "@/components/ui/Brief";
 import Pill from "@/components/ui/Pill";
-import Image from "next/image";
 
 export default function Geography() {
   return (
@@ -13,9 +12,9 @@ export default function Geography() {
           <Brief>
             Built to <em className="font-light">scale</em>
           </Brief>
-          <p className="max-w-[460px] text-center">
-            Whether you need millions of links or billions of clicks, we've got
-            you covered. We’re not bound by geography so tap in today.
+          <p className="max-w-[360px] text-center">
+            No boundaries or restrictions, designed to manage billions of clicks
+            and millions of links.
           </p>
           <Link href={"/register"} className="flex w-full">
             <Button className="mt-md flex-1 w-full"> Try for free</Button>

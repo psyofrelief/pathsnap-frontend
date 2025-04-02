@@ -26,7 +26,7 @@ const AccordionTrigger = ({
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       className={cn(
-        "flex flex-1 bg-popover rounded p-md data-[state=closed]:hover:underline  items-center justify-between text-sm data-[state=open]:font-bold data-[state=closed]:font-normal transition-all   text-left [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 bg-popover rounded p-md data-[state=closed]:hover:underline data-[state=open]:bg-accent data-[state=open]:text-foreground-accent  items-center justify-between text-sm data-[state=open]:font-bold data-[state=closed]:font-normal transition-all   text-left [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}

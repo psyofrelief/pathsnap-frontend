@@ -8,10 +8,9 @@ export default function Hero() {
     <Section className="justify-center bg-radial from-accent/20 to-background via-background items-center min-h-screen-minus-navbar">
       <header className="flex flex-col items-center gap-xs ">
         <Brief>Take full control over your links</Brief>
-        <p className="text-center max-w-[690px]">
-          Easily shorten and manage your URLs with Shor10. Create branded short
-          links, generate customisable QR codes, build link in bio pages, and
-          run interactive surveys.
+        <p className="text-center max-w-[450px]">
+          Need trackable QR codes and shorter links? Create, modify and monitor
+          your URLs in a matter of seconds with Pzag.
         </p>
         <div className="flex gap-sm">
           <Link href={"/register"} className="flex-1 flex mt-md">

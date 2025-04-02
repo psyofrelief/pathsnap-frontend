@@ -5,33 +5,38 @@ interface FAQ {
 
 export const faqs: FAQ[] = [
   {
-    question: "What services does Prekoda offer?",
+    question: "What is Pzag?",
     answer:
-      "Prekoda specializes in web design, development, branding, and digital strategy to help businesses establish a strong online presence.",
+      "Pzag is a URL shortener that makes it simple to generate QR codes and build unique short connections.",
   },
   {
-    question: "How long does it take to build a website with Prekoda?",
+    question: "Is Pzag free to use?",
     answer:
-      "The timeline depends on the project's complexity. A simple website can take 2-4 weeks, while larger projects may take 6-12 weeks.",
+      "Indeed! There are no hidden fees associated with creating QR codes or shortening URLs.",
   },
   {
-    question: "Does Prekoda offer ongoing support and maintenance?",
+    question: "Can I customise my shortened links?",
     answer:
-      "Yes, we provide ongoing support, updates, and maintenance plans to ensure your website runs smoothly and stays up to date.",
+      "Of course! With Pzag, you can make unique short connections that reflect your style or brand.",
   },
   {
-    question: "Can Prekoda help with SEO and performance optimization?",
+    question: "Do Pzag links expire?",
     answer:
-      "Absolutely! We optimize websites for search engines and performance to improve visibility and user experience.",
+      "No, until you decide to remove them, your shortened links won't expire.",
   },
   {
-    question: "What industries does Prekoda work with?",
+    question: "Can I track my link performance?",
     answer:
-      "We work with businesses across various industries, including e-commerce, technology, healthcare, and creative agencies.",
+      "Indeed! You can check the number of clicks on your links thanks to Pzag's precise analytics.",
   },
   {
-    question: "How do I get started with Prekoda?",
+    question: "Do I need an account to use Pzag?",
     answer:
-      "Simply reach out via our contact page, and we'll schedule a consultation to discuss your project and how we can help.",
+      "Yes, in order to shorten links, you must have an account. Additional capabilities like link analytics and personalisation are unlocked upon registration.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Sign up then paste your long URL into Pzag, click shorten, and start sharing your custom link or QR code instantly!",
   },
 ];
