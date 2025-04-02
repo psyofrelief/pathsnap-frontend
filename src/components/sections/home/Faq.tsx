@@ -10,7 +10,10 @@ import { faqs } from "@/data/faqs";
 
 export default function Faq() {
   return (
-    <Section className="bg-background justify-center items-center min-h-screen gap-y-lg">
+    <Section
+      id="faq"
+      className="bg-background justify-center items-center min-h-screen gap-y-lg"
+    >
       <header className="flex flex-col items-center">
         <Brief>Frequently Asked Questions</Brief>
         <p>What would you like to know about Pzag?</p>

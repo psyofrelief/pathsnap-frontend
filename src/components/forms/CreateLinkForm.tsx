@@ -35,8 +35,6 @@ export default function CreateLinkDialog() {
   });
 
   function onSubmit(values) {
-    console.log("Creating link with values:", values);
-
     const linkData = {
       url: values.destinationUrl,
       title: values.title || undefined,

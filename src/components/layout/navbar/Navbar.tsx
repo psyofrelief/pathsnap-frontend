@@ -2,20 +2,34 @@
 
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
 import EditUserDialog from "@/components/forms/EditAccountForm";
 import Loading from "../Loading";
 import { useState } from "react";
+import { useHandleScroll } from "@/hooks/scroll";
 
 export default function Navbar() {
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth({ middleware: "auth" });
+  const scrollToSection = useHandleScroll();
+  const pathname = usePathname();
+  const router = useRouter();
 
   if (user === undefined) {
     return <Loading />;
   }
+
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      event.preventDefault();
+      scrollToSection("faq");
+    } else {
+      router.push("/#faq");
+    }
+  };
 
   return (
     <nav className="flex z-[1] bg-background justify-between items-center px-md py-sm">
@@ -26,7 +40,7 @@ export default function Navbar() {
         <div className="h-md w-[2px] bg-outline" />
         <ul className="gap-x-sm flex items-center">
           {user && <NavLink label="Links" href="/links" />}
-          <NavLink label="FAQ" href="." />
+          <NavLink label="FAQ" href="/#faq" onClick={handleNavClick} />
           <NavLink label="Support" href="/support" />
         </ul>
       </div>
