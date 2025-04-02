@@ -16,7 +16,10 @@ import { useLinks } from "@/hooks/links";
 
 const formSchema = z.object({
   title: z.string().optional(),
-  shortLink: z.string().optional(),
+  shortLink: z
+    .string()
+    .min(2, { message: "Short code must be minimum 2 characters" })
+    .optional(),
   destinationUrl: z.string().url({ message: "Enter a valid URL" }),
 });
 

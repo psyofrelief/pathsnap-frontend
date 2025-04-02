@@ -8,10 +8,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import Button from "@/components/ui/button";
-import Input from "@/components/ui/input";
-import Label from "@/components/ui/label";
+} from "@/components/ui/Dialog";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Label from "@/components/ui/Label";
 import { useLinks } from "@/hooks/links";
 import EditIcon from "../icons/EditIcon";
 
@@ -28,7 +28,10 @@ interface EditLinkDialogProps {
 
 const formSchema = z.object({
   title: z.string().optional(),
-  shortLink: z.string().optional(),
+  shortLink: z
+    .string()
+    .min(2, { message: "Short code must be minimum 2 characters" })
+    .optional(),
   destinationUrl: z.string().url({ message: "Enter a valid URL" }),
 });
 
