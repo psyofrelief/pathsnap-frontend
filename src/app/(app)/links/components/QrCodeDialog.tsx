@@ -18,6 +18,7 @@ interface Props {
 
 export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -36,13 +37,17 @@ export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
         <DialogHeader>
           <DialogTitle className="font-lastik">Your QR Code</DialogTitle>
         </DialogHeader>
-        <div className="aspect-square p-lg rounded bg-white">
+        <div className="aspect-square w-full max-w-[300px] p-lg rounded bg-white flex items-center justify-center">
+          {loading && <span className="loader" />} {/* Loader */}
           <Image
             loading="eager"
             src={qrCodeUrl}
-            alt="Qr Code"
+            alt="QR Code"
             height={300}
             width={300}
+            onLoad={() => setLoading(false)}
+            onError={() => setLoading(false)}
+            className={loading ? "hidden" : "block"}
           />
         </div>
       </DialogContent>

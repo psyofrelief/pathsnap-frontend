@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Label from "../ui/Label";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import Link from "next/link";
 import { useAuth } from "@/hooks/auth";
 
 const formSchema = z.object({
@@ -39,6 +38,7 @@ const formSchema = z.object({
 });
 
 export default function RegisterForm() {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -57,7 +57,12 @@ export default function RegisterForm() {
   const { register: registerUser } = useAuth();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    registerUser({ ...values, setErrors: () => {}, setStatus: () => {} });
+    registerUser({
+      ...values,
+      setLoading,
+      setErrors: () => {},
+      setStatus: () => {},
+    });
   }
 
   return (
@@ -113,7 +118,7 @@ export default function RegisterForm() {
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" className="w-full">
+      <Button isLoading={isLoading} type="submit" className="w-full">
         Register
       </Button>
     </form>

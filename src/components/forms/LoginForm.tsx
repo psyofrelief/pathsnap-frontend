@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,10 +24,12 @@ export default function LoginForm() {
     defaultValues: { email: "", password: "" },
   });
 
+  const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    login({ ...values, setErrors: () => {}, setStatus: () => {} });
+    login({ ...values, setLoading, setErrors: () => {}, setStatus: () => {} });
   }
 
   return (
@@ -63,7 +65,7 @@ export default function LoginForm() {
 
       <Link href={"/forgot-password"}>Forgot your password?</Link>
 
-      <Button type="submit" className="w-full">
+      <Button isLoading={loading} type="submit" className="w-full">
         Login
       </Button>
     </form>

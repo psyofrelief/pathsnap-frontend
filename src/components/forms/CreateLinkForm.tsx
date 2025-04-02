@@ -23,6 +23,7 @@ const formSchema = z.object({
 export default function CreateLinkDialog() {
   const { createLink } = useLinks();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -42,7 +43,7 @@ export default function CreateLinkDialog() {
       title: values.title || undefined, // Only include title if it's not empty
     };
 
-    createLink(linkData);
+    createLink({ linkData, setLoading });
     reset();
     setOpen(false);
   }
@@ -87,8 +88,8 @@ export default function CreateLinkDialog() {
               <p className="text-red-500">{errors.destinationUrl.message}</p>
             )}
           </div>
-          <Button type="submit" className="w-full">
-            Create Link
+          <Button isLoading={loading} type="submit" className="w-full">
+            {loading ? "Creating..." : "Create link"}
           </Button>
         </form>
       </DialogContent>

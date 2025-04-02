@@ -7,8 +7,10 @@ import NavLink from "./NavLink";
 import Button from "../../ui/Button";
 import EditUserDialog from "@/components/forms/EditAccountForm";
 import Loading from "../Loading";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth({ middleware: "auth" });
 
   if (user === undefined) {
@@ -41,7 +43,14 @@ export default function Navbar() {
       ) : (
         <div className="flex gap-x-sm items-center">
           <EditUserDialog user={user} />
-          <Button className="flex-0" variant="outline" onClick={logout}>
+          <Button
+            isLoading={loading}
+            className="flex-0"
+            variant="outline"
+            onClick={() => {
+              logout({ setLoading });
+            }}
+          >
             Logout
           </Button>
         </div>

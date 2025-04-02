@@ -31,6 +31,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function EditUserDialog({ user }: EditUserDialogProps) {
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const { updateUser, deleteUser } = useAuth();
   const [open, setOpen] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
@@ -56,8 +58,7 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
     if (isDeleteClicked) {
       return;
     }
-    console.log(isDeleteClicked);
-    updateUser({ name: values.name });
+    updateUser({ name: values.name, setLoading: setUpdateLoading });
     setOpen(false);
     toast("Account updated successfully");
   }
@@ -71,7 +72,7 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
   }
 
   function confirmDelete() {
-    deleteUser();
+    deleteUser({ setLoading: setDeleteLoading });
     setOpen(false);
   }
 
@@ -110,14 +111,16 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
             </Button>
             <Button
               type="button"
+              isLoading={deleteLoading}
               className={`w-full ${!isDeleteClicked && "hidden"}`}
               variant="destructive"
               onClick={confirmDelete}
             >
-              Are you sure?
+              Confirm Deletion
             </Button>
             <Button
               type="submit"
+              isLoading={updateLoading}
               variant="outline"
               className={`w-full ${isDeleteClicked && "hidden"}`}
             >

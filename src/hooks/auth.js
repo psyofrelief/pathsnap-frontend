@@ -2,7 +2,6 @@ import useSWR from "swr";
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -29,42 +28,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
   const csrf = () => axios.get("/sanctum/csrf-cookie");
 
-  const register = async ({ setErrors, ...props }) => {
-    await csrf();
-
-    setErrors([]);
-
-    axios
-      .post("/register", props)
-      .then(() => {
-        router.push("/verify-email");
-        return mutate();
-      })
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
-        console.log(error);
-
-        setErrors(error.response.data.errors);
-      });
-  };
-
-  const login = async ({ setErrors, setStatus, ...props }) => {
-    await csrf();
-
-    setErrors([]);
-    setStatus(null);
-
-    axios
-      .post("/login", props)
-      .then(() => mutate())
-      .catch((error) => {
-        if (error.response.status !== 422) throw error;
-
-        setErrors(error.response.data.errors);
-      });
-  };
-
-  const forgotPassword = async ({ setErrors, setStatus, email }) => {
+  const forgotPassword = async ({
+    setErrors,
+    setLoading,
+    setStatus,
+    email,
+  }) => {
+    setLoading(true);
     await csrf();
 
     setErrors([]);
@@ -77,10 +47,19 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         if (error.response.status !== 422) throw error;
 
         setErrors(error.response.data.errors);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  const resetPassword = async ({ setErrors, setStatus, ...props }) => {
+  const resetPassword = async ({
+    setErrors,
+    setLoading,
+    setStatus,
+    ...props
+  }) => {
+    setLoading(true);
     await csrf();
 
     setErrors([]);
@@ -95,23 +74,33 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         if (error.response.status !== 422) throw error;
 
         setErrors(error.response.data.errors);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
-  const resendEmailVerification = ({ setStatus }) => {
+  const resendEmailVerification = ({ setStatus, setLoading }) => {
+    setLoading(true);
     axios
       .post("/email/verification-notification")
-      .then((response) => setStatus(response.data.status));
+      .then((response) => setStatus(response.data.status))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  const logout = async () => {
+  const logout = async ({ setLoading }) => {
+    setLoading(true);
     if (!error) {
       await axios.post("/logout").then(() => mutate());
     }
 
     window.location.pathname = "/login";
+    setLoading(false);
   };
-  const updateUser = async (values) => {
+  const updateUser = async ({ setLoading, ...values }) => {
+    setLoading(true);
     await csrf();
     try {
       const response = await axios.put("/api/user", values);
@@ -120,10 +109,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     } catch (error) {
       console.error("Error updating user:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const deleteUser = async () => {
+  const deleteUser = async ({ setLoading }) => {
+    setLoading(true);
     await csrf();
     try {
       await axios.delete("/api/user");
@@ -132,7 +124,42 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     } catch (error) {
       console.error("Error deleting user:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
+  };
+  const register = async ({ setErrors, setLoading, ...props }) => {
+    setLoading(true);
+    await csrf();
+    setErrors([]);
+
+    axios
+      .post("/register", props)
+      .then(() => {
+        router.push("/verify-email");
+        return mutate();
+      })
+      .catch((error) => {
+        if (error.response.status !== 422) throw error;
+        setErrors(error.response.data.errors);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const login = async ({ setErrors, setStatus, setLoading, ...props }) => {
+    setLoading(true);
+    await csrf();
+    setErrors([]);
+    setStatus(null);
+
+    axios
+      .post("/login", props)
+      .then(() => mutate())
+      .catch((error) => {
+        if (error.response.status !== 422) throw error;
+        setErrors(error.response.data.errors);
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {

@@ -33,6 +33,8 @@ const formSchema = z.object({
 });
 
 export default function EditLinkDialog({ link }: EditLinkDialogProps) {
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const { updateLink, deleteLink } = useLinks();
   const [open, setOpen] = useState(false);
   const {
@@ -58,10 +60,15 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
   }, [link, reset]);
 
   function onSubmit(values: any) {
-    updateLink(link.id, {
+    const valuesObject = {
       title: values.title || undefined,
       short_url: values.shortLink || undefined,
       url: values.destinationUrl,
+    };
+    updateLink({
+      id: link.id,
+      updatedData: valuesObject,
+      setLoading: setUpdateLoading,
     });
     setOpen(false);
   }
@@ -112,11 +119,19 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
             )}
           </div>
           <div className="flex gap-sm">
-            <Button variant="outline" type="submit" className="w-full">
+            <Button
+              isLoading={updateLoading}
+              variant="outline"
+              type="submit"
+              className="w-full"
+            >
               Save Changes
             </Button>
             <Button
-              onClick={() => deleteLink(link.id)}
+              isLoading={deleteLoading}
+              onClick={() =>
+                deleteLink({ id: link.id, setLoading: setDeleteLoading })
+              }
               variant="destructive"
               className="w-full"
             >

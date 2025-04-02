@@ -8,51 +8,44 @@ export const useLinks = () => {
 
   const isLoading = !links && !error;
 
-  const getLinks = async (setLinks) => {
-    try {
-      const response = await axios.get("/api/short-links");
-      setLinks(response.data); // Update state with fetched links
-      mutate(); // Refresh the links list
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching links:", error);
-      throw error;
-    }
-  };
-
-  const createLink = async (linkData) => {
+  const createLink = async ({ linkData, setLoading }) => {
+    setLoading(true);
     try {
       const response = await axios.post("/api/short-links", linkData);
-      await mutate(); // Wait for mutation to complete
+      await mutate();
       return response.data;
     } catch (error) {
       console.error("Error creating link:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Update an existing link
-  const updateLink = async (id, updatedData) => {
+  const updateLink = async ({ id, updatedData, setLoading }) => {
+    setLoading(true);
     try {
       const response = await axios.put(`/api/short-links/${id}`, updatedData);
       mutate();
-
-      // router.refresh();
       return response.data;
     } catch (error) {
       console.error("Error updating link:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Delete a link
-  const deleteLink = async (id) => {
+  const deleteLink = async ({ id, setLoading }) => {
+    setLoading(true);
     try {
       await axios.delete(`/api/short-links/${id}`);
-      mutate(); // Refresh the links list
+      mutate();
     } catch (error) {
       console.error("Error deleting link:", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +53,6 @@ export const useLinks = () => {
     links,
     isLoading,
     error,
-    getLinks,
     createLink,
     updateLink,
     deleteLink,

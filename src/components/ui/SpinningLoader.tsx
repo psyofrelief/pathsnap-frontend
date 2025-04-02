@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { LoaderPinwheel } from "lucide-react";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -20,19 +21,18 @@ export default function Button({
     <button
       type={type}
       className={cn(
-        "font-semibold flex-1 flex gap-x-xs items-center rounded-full whitespace-nowrap transition-colors justify-center px-sm py-xs size-fit",
+        "font-semibold flex-1 rounded-full whitespace-nowrap transition-colors justify-center px-sm py-xs size-fit",
         variant === "primary"
           ? "bg-accent text-foreground-accent hover:bg-foreground"
           : variant === "destructive"
             ? "bg-destructive text-foreground"
             : "border bg-background border-outline text-foreground hover:bg-popover",
-        isLoading && "opacity-50 cursor-not-allowed",
         className,
       )}
-      disabled={isLoading} // Prevent multiple clicks
-      {...props}
+      {...props} // Spread any additional props
     >
-      {isLoading ? <span className="loader" /> : children}
+      {children}
+      {isLoading && <LoaderPinwheel />}
     </button>
   );
 }
