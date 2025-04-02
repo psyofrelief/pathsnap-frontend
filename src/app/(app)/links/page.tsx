@@ -4,10 +4,14 @@ import Brief from "@/components/ui/Brief";
 import Section from "@/components/ui/Section";
 import { useLinks } from "@/hooks/links";
 import LinkCard from "@/components/shared/LinkCard";
+import Loading from "@/components/layout/Loading";
 
 export default function LinksPage() {
-  const { links } = useLinks();
+  const { links, isLoading } = useLinks();
 
+  if (isLoading) {
+    return <Loading />;
+  }
   if (!links || links.length === 0) {
     return (
       <Section className="bg-radial min-h-screen-minus-navbar gap-sm items-center justify-center from-accent/20 to-background via-background">

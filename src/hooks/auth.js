@@ -1,30 +1,31 @@
 import useSWR from "swr";
 import axios from "@/lib/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
-
-  const isEmpty = (obj) => Object.keys(obj).length === 0;
 
   const {
     data: user,
     error,
     mutate,
-  } = useSWR("/api/user", () =>
-    axios
-      .get("/api/user")
-      .then((res) => {
-        return !isEmpty(res.data) ? res.data : null;
-      })
-      .catch((error) => {
-        if (error.response.status !== 409) throw error;
-
-        router.push("/verify-email");
-      }),
-  );
+  } = useSWR("/api/user", async () => {
+    try {
+      if (user === undefined) {
+        setIsLoading(true);
+      }
+      const res = await axios.get("/api/user");
+      return Object.keys(res.data).length ? res.data : null;
+    } catch (error) {
+      if (error.response?.status !== 409) throw error;
+      router.push("/verify-email");
+    } finally {
+      setIsLoading(false);
+    }
+  });
 
   const csrf = () => axios.get("/sanctum/csrf-cookie");
 
@@ -35,7 +36,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     axios
       .post("/register", props)
-      .then((data) => {
+      .then(() => {
         router.push("/verify-email");
         return mutate();
       })
@@ -151,6 +152,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     user,
     register,
     login,
+    isLoading,
     updateUser,
     deleteUser,
     forgotPassword,

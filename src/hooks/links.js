@@ -1,13 +1,12 @@
 import useSWR from "swr";
 import axios from "@/lib/axios";
-import { useRouter } from "next/navigation";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const useLinks = () => {
-  const router = useRouter();
-  // Fetch links
   const { data: links, error, mutate } = useSWR("/api/short-links", fetcher);
+
+  const isLoading = !links && !error;
 
   const getLinks = async (setLinks) => {
     try {
@@ -21,13 +20,10 @@ export const useLinks = () => {
     }
   };
 
-  // Create a new link
   const createLink = async (linkData) => {
     try {
       const response = await axios.post("/api/short-links", linkData);
-      console.log(response);
-      mutate(); // Refresh the links list
-      window.location.href = "/links";
+      await mutate(); // Wait for mutation to complete
       return response.data;
     } catch (error) {
       console.error("Error creating link:", error);
@@ -60,5 +56,13 @@ export const useLinks = () => {
     }
   };
 
-  return { links, error, getLinks, createLink, updateLink, deleteLink };
+  return {
+    links,
+    isLoading,
+    error,
+    getLinks,
+    createLink,
+    updateLink,
+    deleteLink,
+  };
 };

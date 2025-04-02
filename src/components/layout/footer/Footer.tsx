@@ -4,7 +4,7 @@ import FooterLink from "./FooterLink";
 
 export default function Footer() {
   return (
-    <footer className="flex z-[0] px-md py-md border-t border-t-outline sticky bottom-0 w-full bg-background justify-between items-center">
+    <footer className="flex z-[0] px-md py-md border-t border-t-outline  w-full bg-background justify-between items-center">
       <div className="flex gap-sm items-center">
         <Link href={"/"}>
           <Logo />

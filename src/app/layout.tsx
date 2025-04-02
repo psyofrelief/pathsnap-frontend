@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nacelle.variable} ${lastik.variable} antialiased min-h-screen flex flex-col bg-background`}
+        className={`${nacelle.variable} ${lastik.variable} antialiased relative min-h-screen flex flex-col bg-background`}
       >
         {children}
       </body>

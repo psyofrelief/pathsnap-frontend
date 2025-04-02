@@ -1,29 +1,20 @@
 "use client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
 
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
 import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
-import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
 import EditUserDialog from "@/components/forms/EditAccountForm";
+import Loading from "../Loading";
 
 export default function Navbar() {
   const { user, logout } = useAuth({ middleware: "auth" });
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  if (user === undefined) {
+    return <Loading />;
+  }
+
   return (
     <nav className="flex z-[1] bg-background justify-between items-center px-md py-sm">
       <div className="flex gap-x-md items-center">
