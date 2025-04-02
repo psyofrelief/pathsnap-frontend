@@ -7,7 +7,6 @@ import ClickIcon from "../icons/ClickIcon";
 import ArrowDownRightIcon from "../icons/ArrowDownRight";
 import { toast } from "sonner";
 import EditLinkDialog from "../forms/EditLinkForm";
-import ShareDialog from "@/app/(app)/links/components/ShareDialog";
 import QrCodeDialog from "@/app/(app)/links/components/QrCodeDialog";
 
 interface Link {
@@ -89,7 +88,6 @@ export default function LinkCard({ link }: LinkProps) {
           >
             Copy
           </LinkCardButton>
-          <ShareDialog shortUrl={link.short_url} />
 
           <QrCodeDialog shortUrl={link.short_url} qrCodeUrl={link.qr_code} />
 
