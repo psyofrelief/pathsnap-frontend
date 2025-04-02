@@ -10,7 +10,7 @@ import { faqs } from "@/data/faqs";
 
 export default function Faq() {
   return (
-    <Section className="bg-background justify-center min-h-screen gap-y-lg">
+    <Section className="bg-background justify-center items-center min-h-screen gap-y-lg">
       <header className="flex flex-col items-center">
         <Brief>Frequently Asked Questions</Brief>
         <p>What would you like to know about Pzag?</p>
@@ -18,7 +18,7 @@ export default function Faq() {
       <Accordion
         type="single"
         collapsible
-        className=" grid grid-cols-2 gap-xs flex-col "
+        className=" grid grid-cols-1 max-w-[800px] w-full gap-xs flex-col "
       >
         {faqs.map((e, idx) => (
           <AccordionItem value={`Question ${idx}`} key={Math.random()}>

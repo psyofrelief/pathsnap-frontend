@@ -17,7 +17,7 @@ export default function Section({
   return (
     <Tag
       className={cn(
-        "sm:px-2xl sm:py-2xl z-[1] px-sm py-md flex flex-col ",
+        "sm:px-lg sm:py-2xl z-[1] px-sm py-md flex flex-col ",
         className,
       )}
       {...props}

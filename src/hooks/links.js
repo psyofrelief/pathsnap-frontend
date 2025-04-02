@@ -12,6 +12,8 @@ export const useLinks = () => {
     setLoading(true);
     try {
       const response = await axios.post("/api/short-links", linkData);
+      console.log(linkData);
+      console.log(response);
       await mutate();
       return response.data;
     } catch (error) {

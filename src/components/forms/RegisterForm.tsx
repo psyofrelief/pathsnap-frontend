@@ -118,7 +118,7 @@ export default function RegisterForm() {
       </div>
 
       {/* Submit Button */}
-      <Button isLoading={isLoading} type="submit" className="w-full">
+      <Button isLoading={loading} type="submit" className="w-full">
         Register
       </Button>
     </form>

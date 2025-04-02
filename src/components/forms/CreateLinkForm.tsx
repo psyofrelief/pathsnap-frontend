@@ -37,13 +37,14 @@ export default function CreateLinkDialog() {
   function onSubmit(values) {
     console.log("Creating link with values:", values);
 
-    // Send the data, only including title if it's provided
     const linkData = {
       url: values.destinationUrl,
-      title: values.title || undefined, // Only include title if it's not empty
+      title: values.title || undefined,
+      short_url: values.shortLink || undefined,
     };
 
     createLink({ linkData, setLoading });
+    console.log(linkData);
     reset();
     setOpen(false);
   }
