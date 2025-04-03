@@ -106,7 +106,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     await csrf();
     try {
       const response = await axios.put("/api/user", values);
-      mutate(); // Refresh user data
+      mutate();
       return response.data;
     } catch (error) {
       console.error("Error updating user:", error);
@@ -121,8 +121,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     await csrf();
     try {
       await axios.delete("/api/user");
-      mutate(null); // Clear user data
-      window.location.pathname = "/login"; // Redirect to login
+      mutate(null);
+      window.location.pathname = "/login";
     } catch (error) {
       console.error("Error deleting user:", error);
       throw error;

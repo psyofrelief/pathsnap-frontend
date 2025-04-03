@@ -6,7 +6,7 @@ import Section from "@/components/ui/Section";
 import { useAuth } from "@/hooks/auth";
 import { useState } from "react";
 
-const Page = () => {
+export default function VerifyEmail() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const { logout, resendEmailVerification } = useAuth({
@@ -52,6 +52,4 @@ const Page = () => {
       </div>
     </Section>
   );
-};
-
-export default Page;
+}
