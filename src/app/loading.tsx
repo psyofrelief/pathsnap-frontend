@@ -1,5 +1,5 @@
-import Loading from "@/components/layout/Loading";
+import LoadingOverlay from "@/components/layout/LoadingOverlay";
 
-export default function LoadingScreen() {
-  return <Loading />;
+export default function Loading() {
+  return <LoadingOverlay />;
 }

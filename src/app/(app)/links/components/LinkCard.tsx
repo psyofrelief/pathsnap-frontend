@@ -1,12 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
-import QrCodeIcon from "../icons/QrCodeIcon";
-import EditIcon from "../icons/EditIcon";
 import LinkCardButton from "./LinkCardButton";
-import ClickIcon from "../icons/ClickIcon";
-import ArrowDownRightIcon from "../icons/ArrowDownRight";
+import ClickIcon from "@/components/icons/ClickIcon";
+import ArrowDownRightIcon from "@/components/icons/ArrowDownRight";
 import { toast } from "sonner";
-import EditLinkDialog from "../forms/EditLinkForm";
+import EditLinkDialog from "@/components/forms/EditLinkForm";
 import QrCodeDialog from "@/app/(app)/links/components/QrCodeDialog";
 
 interface Link {

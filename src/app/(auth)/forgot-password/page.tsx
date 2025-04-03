@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import FormMessage from "@/components/ui/FormMessage";
-import AuthSessionStatus from "@/app/(auth)/AuthSessionStatus";
+import AuthSessionStatus from "@/components/ui/AuthSessionStatus";
 import Brief from "@/components/ui/Brief";
 import Section from "@/components/ui/Section";
 import { useAuth } from "@/hooks/auth";

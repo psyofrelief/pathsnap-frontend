@@ -3,14 +3,14 @@ import CreateLinkDialog from "@/components/forms/CreateLinkForm";
 import Brief from "@/components/ui/Brief";
 import Section from "@/components/ui/Section";
 import { useLinks } from "@/hooks/links";
-import LinkCard from "@/components/shared/LinkCard";
-import Loading from "@/components/layout/Loading";
+import LinkCard from "./components/LinkCard";
+import LoadingOverlay from "@/components/layout/LoadingOverlay";
 
 export default function LinksPage() {
   const { links, isLoading } = useLinks();
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingOverlay />;
   }
   if (!links || links.length === 0) {
     return (

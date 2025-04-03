@@ -5,9 +5,9 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import Pill from "@/components/ui/Pill";
-import LinkCardButton from "@/components/shared/LinkCardButton";
+import LinkCardButton from "./LinkCardButton";
 import Image from "next/image";
 import QrCodeIcon from "@/components/icons/QrCodeIcon";
 

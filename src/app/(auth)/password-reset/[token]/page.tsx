@@ -7,7 +7,7 @@ import Label from "@/components/ui/Label";
 import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import AuthSessionStatus from "@/app/(auth)/AuthSessionStatus";
+import AuthSessionStatus from "@/components/ui/AuthSessionStatus";
 import Section from "@/components/ui/Section";
 import Brief from "@/components/ui/Brief";
 

@@ -7,11 +7,11 @@ import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
 import EditUserDialog from "@/components/forms/EditAccountForm";
-import Loading from "../Loading";
 import { useState } from "react";
 import { useHandleScroll } from "@/hooks/scroll";
 import Menu from "../menu/Menu";
 import { useNavClick } from "@/hooks/useNavClick";
+import LoadingOverlay from "../LoadingOverlay";
 
 export default function Navbar() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ export default function Navbar() {
   const handleNavClick = useNavClick();
 
   if (user === undefined) {
-    return <Loading />;
+    return <LoadingOverlay />;
   }
 
   return (
