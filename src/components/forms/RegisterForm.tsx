@@ -7,6 +7,7 @@ import Label from "../ui/Label";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { useAuth } from "@/hooks/auth";
+import FormMessage from "../ui/FormMessage";
 
 const formSchema = z.object({
   name: z
@@ -20,6 +21,7 @@ const formSchema = z.object({
     .email({ message: "Please enter a valid email address." })
     .max(50, { message: "Email cannot exceed 50 characters." })
     .nonempty({ message: "Email is required." }),
+
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters long." })
@@ -32,10 +34,18 @@ const formSchema = z.object({
     })
     .regex(/\d/, { message: "Password must include at least one number." })
     .nonempty({ message: "Password is required." }),
+
   password_confirmation: z
     .string()
     .nonempty({ message: "Password confirmation is required." }),
 });
+
+interface ApiErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  password_confirmation?: string;
+}
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
@@ -43,6 +53,7 @@ export default function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,14 +64,25 @@ export default function RegisterForm() {
     },
   });
 
-  // Rename `register` from useAuth to avoid conflict
   const { register: registerUser } = useAuth();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     registerUser({
       ...values,
       setLoading,
-      setErrors: () => {},
+      setErrors: (apiErrors: ApiErrors) => {
+        if (apiErrors.name)
+          setError("name", { type: "server", message: apiErrors.name });
+        if (apiErrors.email)
+          setError("email", { type: "server", message: apiErrors.email });
+        if (apiErrors.password)
+          setError("password", { type: "server", message: apiErrors.password });
+        if (apiErrors.password_confirmation)
+          setError("password_confirmation", {
+            type: "server",
+            message: apiErrors.password_confirmation,
+          });
+      },
       setStatus: () => {},
     });
   }
@@ -74,7 +96,7 @@ export default function RegisterForm() {
       <div className="flex flex-col gap-y-xs">
         <Label htmlFor="name">Name</Label>
         <Input placeholder="John" id="name" type="text" {...register("name")} />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+        {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
       </div>
 
       {/* Email Field */}
@@ -86,7 +108,7 @@ export default function RegisterForm() {
           type="email"
           {...register("email")}
         />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+        {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
       </div>
 
       {/* Password Field */}
@@ -99,11 +121,11 @@ export default function RegisterForm() {
           {...register("password")}
         />
         {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
+          <FormMessage>{errors.password.message}</FormMessage>
         )}
       </div>
 
-      {/* Password Field */}
+      {/* Password Confirmation Field */}
       <div className="flex flex-col gap-y-sm">
         <Label htmlFor="password_confirmation">Confirm Password</Label>
         <Input
@@ -113,7 +135,7 @@ export default function RegisterForm() {
           {...register("password_confirmation")}
         />
         {errors.password_confirmation && (
-          <p className="text-red-500">{errors.password_confirmation.message}</p>
+          <FormMessage>{errors.password_confirmation.message}</FormMessage>
         )}
       </div>
 

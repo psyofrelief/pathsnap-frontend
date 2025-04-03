@@ -4,11 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import Button from "@/components/ui/button";
-import Input from "@/components/ui/input";
-import Label from "@/components/ui/label";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Label from "@/components/ui/Label";
 import { useLinks } from "@/hooks/links";
 import TextArea from "../ui/TextArea";
+import FormMessage from "../ui/FormMessage";
 
 const formSchema = z.object({
   name: z.string(),
@@ -31,7 +32,6 @@ export default function ContactForm() {
   function onSubmit(values) {
     console.log("Creating link with values:", values);
 
-    // Send the data, only including name if it's provided
     const linkData = {
       message: values.message,
       email: values.email,
@@ -50,6 +50,7 @@ export default function ContactForm() {
       <div className="flex flex-col gap-2">
         <Label htmlFor="name">Name</Label>
         <Input id="name" placeholder="John Appleseed" {...register("name")} />
+        {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">Email</Label>
@@ -59,6 +60,7 @@ export default function ContactForm() {
           placeholder="example@gmail.com"
           {...register("email")}
         />
+        {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="message">Your message</Label>
@@ -67,9 +69,7 @@ export default function ContactForm() {
           placeholder="Add your message"
           {...register("message")}
         />
-        {errors.message && (
-          <p className="text-red-500">{errors.message.message}</p>
-        )}
+        {errors.message && <FormMessage>{errors.message.message}</FormMessage>}
       </div>
       <Button type="submit" className="w-full">
         Send Message

@@ -32,9 +32,7 @@ const DialogContent = ({
   className,
   children,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-  ref: React.RefObject<React.ElementRef<typeof DialogPrimitive.Content>>;
-}) => (
+}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -85,9 +83,7 @@ DialogFooter.displayName = "DialogFooter";
 const DialogTitle = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> & {
-  ref: React.RefObject<React.ElementRef<typeof DialogPrimitive.Title>>;
-}) => (
+}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) => (
   <DialogPrimitive.Title
     className={cn("text-md font-semibold", className)}
     {...props}
@@ -98,9 +94,7 @@ DialogTitle.displayName = DialogPrimitive.Title.displayName;
 const DialogDescription = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> & {
-  ref: React.RefObject<React.ElementRef<typeof DialogPrimitive.Description>>;
-}) => (
+}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) => (
   <DialogPrimitive.Description
     className={cn("text-foreground-secondary", className)}
     {...props}

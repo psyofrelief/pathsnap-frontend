@@ -14,6 +14,7 @@ import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import { useLinks } from "@/hooks/links";
 import EditIcon from "../icons/EditIcon";
+import FormMessage from "../ui/FormMessage";
 
 interface Link {
   id: string;
@@ -101,6 +102,7 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
               placeholder="Enter a title"
               {...register("title")}
             />
+            {errors.title && <FormMessage>{errors.title.message}</FormMessage>}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="shortLink">Custom Short Link (Optional)</Label>
@@ -109,6 +111,9 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
               placeholder="Enter custom short link"
               {...register("shortLink")}
             />
+            {errors.shortLink && (
+              <FormMessage>{errors.shortLink.message}</FormMessage>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="destinationUrl">Destination URL</Label>
@@ -118,7 +123,7 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
               {...register("destinationUrl")}
             />
             {errors.destinationUrl && (
-              <p className="text-red-500">{errors.destinationUrl.message}</p>
+              <FormMessage>{errors.destinationUrl.message}</FormMessage>
             )}
           </div>
           <div className="flex gap-sm">

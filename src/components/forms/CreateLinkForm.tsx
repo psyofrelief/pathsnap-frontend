@@ -13,6 +13,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import { useLinks } from "@/hooks/links";
+import FormMessage from "../ui/FormMessage";
 
 const formSchema = z.object({
   title: z.string().optional(),
@@ -70,6 +71,7 @@ export default function CreateLinkDialog() {
               placeholder="Enter a title"
               {...register("title")}
             />
+            {errors.title && <FormMessage>{errors.title.message}</FormMessage>}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="shortLink">Custom Short Link (Optional)</Label>
@@ -78,6 +80,9 @@ export default function CreateLinkDialog() {
               placeholder="Enter custom short link"
               {...register("shortLink")}
             />
+            {errors.shortLink && (
+              <FormMessage>{errors.shortLink.message}</FormMessage>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="destinationUrl">Destination URL</Label>
@@ -87,7 +92,7 @@ export default function CreateLinkDialog() {
               {...register("destinationUrl")}
             />
             {errors.destinationUrl && (
-              <p className="text-red-500">{errors.destinationUrl.message}</p>
+              <FormMessage>{errors.destinationUrl.message}</FormMessage>
             )}
           </div>
           <Button isLoading={loading} type="submit" className="w-full">

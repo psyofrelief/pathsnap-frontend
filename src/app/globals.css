@@ -11,6 +11,8 @@
   --color-foreground: var(--foreground);
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-accent: var(--foreground-accent);
+  --color-foreground-destructive: var(--foreground-destructive);
+  --color-foreground-success: var(--foreground-success);
 
   --text-xs: 0.75rem;
   --text-sm: 1rem;
@@ -40,6 +42,8 @@
   --foreground: hsl(0 0% 90%);
   --foreground-secondary: hsl(0 0% 70%);
   --foreground-accent: hsl(0 0% 7%);
+  --foreground-destructive: hsl(0 91% 68%);
+  --foreground-success: hsl(110 90% 68%);
 
   --outline: hsl(0 0% 15%);
 }

@@ -14,6 +14,7 @@ import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import { useAuth } from "@/hooks/auth";
 import { toast } from "sonner";
+import FormMessage from "../ui/FormMessage";
 
 interface User {
   id: string;
@@ -96,9 +97,7 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
               placeholder="Enter your name"
               {...register("name")}
             />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
-            )}
+            {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
           </div>
           <div className="flex gap-sm">
             <Button

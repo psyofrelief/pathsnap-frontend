@@ -7,6 +7,10 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Link from "next/link";
 import { useAuth } from "@/hooks/auth";
+
+import FormMessage from "../ui/FormMessage";
+import Checkbox from "../ui/Checkbox";
+
 const formSchema = z.object({
   email: z.string().email({ message: "Enter a valid email" }),
   password: z
@@ -19,6 +23,7 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: "", password: "" },
@@ -26,10 +31,27 @@ export default function LoginForm() {
 
   const [loading, setLoading] = useState(false);
 
+  const [shouldRemember, setShouldRemember] = useState(false);
   const { login } = useAuth();
 
+  interface ApiErrors {
+    email?: string;
+    password?: string;
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    login({ ...values, setLoading, setErrors: () => {}, setStatus: () => {} });
+    login({
+      ...values,
+      setLoading,
+      setErrors: (apiErrors: ApiErrors) => {
+        if (apiErrors.email)
+          setError("email", { type: "server", message: apiErrors.email });
+        if (apiErrors.password)
+          setError("password", { type: "server", message: apiErrors.password });
+      },
+      remember: shouldRemember,
+      setStatus: () => {},
+    });
   }
 
   return (
@@ -46,7 +68,7 @@ export default function LoginForm() {
           type="email"
           {...register("email")}
         />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+        {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
       </div>
 
       {/* Password Field */}
@@ -59,11 +81,24 @@ export default function LoginForm() {
           {...register("password")}
         />
         {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
+          <FormMessage>{errors.password.message}</FormMessage>
         )}
       </div>
 
-      <Link href={"/forgot-password"}>Forgot your password?</Link>
+      <div className="flex items-center justify-between">
+        <Link href={"/forgot-password"}>Forgot your password?</Link>
+        <div className="flex gap-x-xs items-center">
+          <label className="" htmlFor="remember">
+            Remember me?
+          </label>
+          <Checkbox
+            id="remember"
+            type="checkbox"
+            name="remember"
+            onChange={(event) => setShouldRemember(event.target.checked)}
+          />
+        </div>
+      </div>
 
       <Button isLoading={loading} type="submit" className="w-full">
         Login

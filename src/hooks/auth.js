@@ -67,12 +67,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     axios
       .post("/reset-password", { token: params.token, ...props })
-      .then((response) =>
-        router.push("/login?reset=" + btoa(response.data.status)),
-      )
+      .then((response) => {
+        setStatus(response.data.status);
+        setTimeout(() => {
+          router.push(`/login?reset=${btoa(response.data.status)}`);
+        }, 500);
+      })
       .catch((error) => {
         if (error.response.status !== 422) throw error;
-
         setErrors(error.response.data.errors);
       })
       .finally(() => {
@@ -140,8 +142,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         return mutate();
       })
       .catch((error) => {
-        if (error.response.status !== 422) throw error;
         setErrors(error.response.data.errors);
+        if (error.response.status !== 422) throw error;
       })
       .finally(() => setLoading(false));
   };
@@ -156,8 +158,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       .post("/login", props)
       .then(() => mutate())
       .catch((error) => {
-        if (error.response.status !== 422) throw error;
         setErrors(error.response.data.errors);
+        if (error.response.status !== 422) throw error;
       })
       .finally(() => setLoading(false));
   };
