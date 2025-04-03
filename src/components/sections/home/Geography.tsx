@@ -22,26 +22,16 @@ export default function Geography() {
         </header>
 
         <div className="flex flex-col items-center gap-sm">
-          <p className="text-foreground-secondary text-center">
+          <p className="sm:w-fit w-[200px] text-foreground-secondary text-center">
             We’ve shortened hundreds links from these countries:
           </p>
-          <ul className="flex flex-wrap gap-xs">
+          <ul className="sm:flex grid grid-cols-3 gap-xs">
             {countries.map((e) => (
-              <Pill className="m-0" key={Math.random()}>
-                {e}
-              </Pill>
+              <Pill key={Math.random()}>{e}</Pill>
             ))}
           </ul>
         </div>
       </div>
-      {/*
-      <Image
-        src={"/images/globe.jpg"}
-        className="mix-blend-lighten aspect-square  size-[500px] my-auto"
-        height={1000}
-        width={1000}
-        alt="Globe"
-      />*/}
     </Section>
   );
 }

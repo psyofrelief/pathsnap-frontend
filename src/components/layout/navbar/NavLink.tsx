@@ -8,11 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 export default function NavLink({ href, label, ...props }: Props) {
   return (
     <li className="flex">
-      <Link
-        {...props}
-        className="flex-1 hover:underline font-semibold"
-        href={href}
-      >
+      <Link {...props} className="flex-1 hover:underline " href={href}>
         {label}
       </Link>
     </li>

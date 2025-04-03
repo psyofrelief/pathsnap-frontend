@@ -19,7 +19,7 @@ export default function LinkCardButton<T extends React.ElementType = "button">({
   return (
     <Component
       className={cn(
-        "rounded-full bg-background w-full whitespace-nowrap h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors",
+        "rounded-full items-center flex justify-center bg-background w-full whitespace-nowrap h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors",
         className,
       )}
       {...props}

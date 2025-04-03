@@ -13,7 +13,7 @@ export default function Features() {
         </Brief>
       </header>
 
-      <ul className="flex w-full gap-sm">
+      <ul className="flex flex-col md:flex-row w-full gap-sm">
         {features.map((e) => (
           <FeatureCard
             icon={e.icon}

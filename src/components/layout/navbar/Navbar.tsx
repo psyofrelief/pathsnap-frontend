@@ -10,6 +10,8 @@ import EditUserDialog from "@/components/forms/EditAccountForm";
 import Loading from "../Loading";
 import { useState } from "react";
 import { useHandleScroll } from "@/hooks/scroll";
+import Menu from "../menu/Menu";
+import { useNavClick } from "@/hooks/useNavClick";
 
 export default function Navbar() {
   const [loading, setLoading] = useState(false);
@@ -17,35 +19,34 @@ export default function Navbar() {
   const scrollToSection = useHandleScroll();
   const pathname = usePathname();
   const router = useRouter();
+  const handleNavClick = useNavClick();
 
   if (user === undefined) {
     return <Loading />;
   }
 
-  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (pathname === "/") {
-      event.preventDefault();
-      scrollToSection("faq");
-    } else {
-      router.push("/#faq");
-    }
-  };
-
   return (
     <nav className="flex z-[1] bg-background justify-between items-center px-md py-sm">
-      <div className="flex gap-x-md items-center">
+      <Link className="flex sm:hidden" href={"/"}>
+        <Logo />
+      </Link>
+      <div className="flex sm:hidden">
+        <Menu />
+      </div>
+      <div className="hidden sm:flex gap-x-md items-center">
         <Link href={"/"}>
           <Logo />
         </Link>
         <div className="h-md w-[2px] bg-outline" />
         <ul className="gap-x-sm flex items-center">
           {user && <NavLink label="Links" href="/links" />}
+          <NavLink label="Home" href="/" />
           <NavLink label="FAQ" href="/#faq" onClick={handleNavClick} />
           <NavLink label="Support" href="/support" />
         </ul>
       </div>
       {!user ? (
-        <div className="flex gap-sm items-center">
+        <div className="hidden sm:flex gap-sm items-center">
           <Link href={"/login"} className="flex">
             <Button variant="outline">Login</Button>
           </Link>
@@ -55,7 +56,7 @@ export default function Navbar() {
           </Link>
         </div>
       ) : (
-        <div className="flex gap-x-sm items-center">
+        <div className="hidden sm:flex gap-x-sm items-center">
           <EditUserDialog user={user} />
           <Button
             isLoading={loading}

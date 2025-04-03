@@ -25,7 +25,7 @@ export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        className="rounded-full bg-background h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors"
+        className="rounded-full w-fit bg-background h-fit border border-outline px-sm py-xs text-xs hover:bg-popover transition-colors"
         asChild
       >
         <LinkCardButton>

@@ -75,7 +75,7 @@ export default function LinkCard({ link }: LinkProps) {
           </header>
         </div>
 
-        <div className="flex gap-xs">
+        <div className="sm:flex hidden gap-xs">
           <LinkCardButton
             onClick={() => {
               const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -95,12 +95,31 @@ export default function LinkCard({ link }: LinkProps) {
         </div>
       </div>
 
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between items-end ml-[72px]">
         <p className="text-xs text-foreground-secondary">{formattedDate}</p>
         <p className="rounded-full flex items-center gap-xs border bg-popover border-outline px-xs py-1 text-xs">
           <ClickIcon />
           {clicks} click{clicks !== 1 && "s"}
         </p>
+      </div>
+
+      <div className="flex sm:hidden gap-xs">
+        <LinkCardButton
+          onClick={() => {
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+            if (!backendUrl) {
+              console.error("Backend URL is not defined");
+              return;
+            }
+            copyToClipboard(`${backendUrl}/${short_url}`);
+          }}
+        >
+          Copy
+        </LinkCardButton>
+
+        <QrCodeDialog shortUrl={link.short_url} qrCodeUrl={link.qr_code} />
+
+        <EditLinkDialog link={link} />
       </div>
     </li>
   );

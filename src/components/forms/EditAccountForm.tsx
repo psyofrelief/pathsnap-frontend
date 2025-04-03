@@ -23,6 +23,7 @@ interface User {
 
 interface EditUserDialogProps {
   user: User;
+  isMenu?: boolean;
 }
 
 const formSchema = z.object({
@@ -31,7 +32,10 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function EditUserDialog({ user }: EditUserDialogProps) {
+export default function EditUserDialog({
+  user,
+  isMenu = false,
+}: EditUserDialogProps) {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const { updateUser, deleteUser } = useAuth();
@@ -80,7 +84,11 @@ export default function EditUserDialog({ user }: EditUserDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <p className="font-semibold cursor-pointer hover:underline">Profile</p>
+        <p
+          className={`cursor-pointer  ${isMenu ? "flex-1 px-sm py-xs rounded transition-colors hover:bg-popover" : " hover:underline"}`}
+        >
+          Profile
+        </p>
       </DialogTrigger>
       <DialogContent className="max-w-[700px]">
         <DialogHeader>

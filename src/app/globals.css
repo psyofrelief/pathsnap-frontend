@@ -28,6 +28,7 @@
   --spacing-2xl: 64px;
 
   --spacing-screen-minus-navbar: calc(100vh - 74px);
+  --spacing-screen-minus-navbar-mobile: calc(100vh - 64px);
 
   --font-sans: var(--font-nacelle);
   --font-lastik: var(--font-lastik);
