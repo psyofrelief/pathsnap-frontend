@@ -7,18 +7,20 @@ import { z } from "zod";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
-import { useLinks } from "@/hooks/links";
 import TextArea from "../ui/TextArea";
 import FormMessage from "../ui/FormMessage";
+import { useSupportEmail } from "@/hooks/useSupportEmail";
 
 const formSchema = z.object({
   name: z.string(),
   email: z.string().email(),
-  message: z.string(),
+  message: z
+    .string()
+    .min(10, { message: "Message must be more than 10 characters" }),
 });
 
 export default function ContactForm() {
-  const { createLink } = useLinks();
+  const { sendSupportEmail, loading, status } = useSupportEmail();
   const {
     register,
     handleSubmit,
@@ -30,15 +32,14 @@ export default function ContactForm() {
   });
 
   function onSubmit(values) {
-    console.log("Creating link with values:", values);
-
-    const linkData = {
+    const formData = {
       message: values.message,
       email: values.email,
-      name: values.name || undefined, // Only include name if it's not empty
+      name: values.name || undefined,
     };
 
-    createLink(linkData);
+    sendSupportEmail(formData);
+
     reset();
   }
 
@@ -71,7 +72,8 @@ export default function ContactForm() {
         />
         {errors.message && <FormMessage>{errors.message.message}</FormMessage>}
       </div>
-      <Button type="submit" className="w-full">
+      {status && <p className="text-foreground-success mx-auto">{status}</p>}
+      <Button isLoading={loading} type="submit" className="w-full">
         Send Message
       </Button>
     </form>
