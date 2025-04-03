@@ -2,7 +2,27 @@ import useSWR from "swr";
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+
+interface AuthProps {
+  middleware?: "auth" | "guest";
+  redirectIfAuthenticated?: string;
+}
+
+interface AuthError {
+  [key: string]: string[];
+}
+
+interface AuthFunctionProps {
+  setErrors: (errors: AuthError) => void;
+  setLoading: (loading: boolean) => void;
+  setStatus: (status: string | null) => void;
+  remember?: boolean;
+}
+
+export const useAuth = ({
+  middleware,
+  redirectIfAuthenticated,
+}: AuthProps = {}) => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const params = useParams();
@@ -18,7 +38,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       }
       const res = await axios.get("/api/user");
       return Object.keys(res.data).length ? res.data : null;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response?.status !== 409) throw error;
       router.push("/verify-email");
     } finally {
@@ -33,11 +53,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     setLoading,
     setStatus,
     email,
-  }) => {
+  }: AuthFunctionProps & { email: string }) => {
     setLoading(true);
     await csrf();
 
-    setErrors([]);
+    setErrors({});
     setStatus(null);
 
     axios
@@ -58,11 +78,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     setLoading,
     setStatus,
     ...props
-  }) => {
+  }: AuthFunctionProps) => {
     setLoading(true);
     await csrf();
 
-    setErrors([]);
+    setErrors({});
     setStatus(null);
 
     axios
@@ -82,7 +102,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       });
   };
 
-  const resendEmailVerification = ({ setStatus, setLoading }) => {
+  const resendEmailVerification = ({
+    setStatus,
+    setLoading,
+  }: AuthFunctionProps) => {
+    setStatus(null);
     setLoading(true);
     axios
       .post("/email/verification-notification")
@@ -92,16 +116,14 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       });
   };
 
-  const logout = async ({ setLoading }) => {
-    setLoading(true);
+  const logout = async () => {
     if (!error) {
       await axios.post("/logout").then(() => mutate());
     }
-
     window.location.pathname = "/login";
-    setLoading(false);
   };
-  const updateUser = async ({ setLoading, ...values }) => {
+
+  const updateUser = async ({ setLoading, ...values }: AuthFunctionProps) => {
     setLoading(true);
     await csrf();
     try {
@@ -116,7 +138,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
   };
 
-  const deleteUser = async ({ setLoading }) => {
+  const deleteUser = async ({ setLoading }: AuthFunctionProps) => {
     setLoading(true);
     await csrf();
     try {
@@ -130,11 +152,16 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       setLoading(false);
     }
   };
-  const register = async ({ setErrors, setLoading, ...props }) => {
-    setLoading(true);
-    await csrf();
-    setErrors([]);
+  const register = async ({
+    setErrors,
+    setLoading = () => {},
 
+    ...props
+  }: AuthFunctionProps) => {
+    setLoading(true);
+    setErrors({});
+
+    await csrf();
     axios
       .post("/register", props)
       .then(() => {
@@ -148,12 +175,18 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       .finally(() => setLoading(false));
   };
 
-  const login = async ({ setErrors, setStatus, setLoading, ...props }) => {
+  const login = async ({
+    setErrors,
+    setStatus,
+    setLoading = () => {},
+
+    ...props
+  }: AuthFunctionProps) => {
     setLoading(true);
-    await csrf();
-    setErrors([]);
+    setErrors({});
     setStatus(null);
 
+    await csrf();
     axios
       .post("/login", props)
       .then(() => mutate())
@@ -172,7 +205,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       router.push("/verify-email");
     }
 
-    if (window.location.pathname === "/verify-email" && user?.email_verified_at)
+    if (
+      window.location.pathname === "/verify-email" &&
+      redirectIfAuthenticated &&
+      user?.email_verified_at
+    )
       router.push(redirectIfAuthenticated);
     if (middleware === "auth" && error) logout();
   }, [user, error]);

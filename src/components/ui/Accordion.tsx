@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 
@@ -11,18 +11,16 @@ const Accordion = AccordionPrimitive.Root;
 const AccordionItem = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> & {
-  ref: React.RefObject<React.ElementRef<typeof AccordionPrimitive.Item>>;
-}) => <AccordionPrimitive.Item className={cn("", className)} {...props} />;
+}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> & {}) => (
+  <AccordionPrimitive.Item className={cn("", className)} {...props} />
+);
 AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = ({
   className,
   children,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-  ref: React.RefObject<React.ElementRef<typeof AccordionPrimitive.Trigger>>;
-}) => (
+}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {}) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       className={cn(
@@ -42,9 +40,7 @@ const AccordionContent = ({
   className,
   children,
   ...props
-}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> & {
-  ref: React.RefObject<React.ElementRef<typeof AccordionPrimitive.Content>>;
-}) => (
+}: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> & {}) => (
   <AccordionPrimitive.Content
     className="overflow-hidden font-medium  data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}

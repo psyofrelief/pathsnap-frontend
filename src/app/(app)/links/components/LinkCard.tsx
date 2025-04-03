@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import EditLinkDialog from "@/components/forms/EditLinkForm";
 import QrCodeDialog from "@/app/(app)/links/components/QrCodeDialog";
 
-interface Link {
+export interface Link {
   id: string;
   title?: string;
   short_url: string;

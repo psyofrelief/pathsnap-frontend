@@ -20,7 +20,6 @@ export default function Menu() {
   const { user, logout } = useAuth();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const closeDrawer = () => {
     setDrawerOpen(false);
   };
@@ -70,10 +69,9 @@ export default function Menu() {
             <>
               <EditUserDialog isMenu user={user} />
               <Button
-                isLoading={loading}
                 className="w-full"
                 onClick={() => {
-                  logout({ setLoading });
+                  logout();
                 }}
               >
                 Logout

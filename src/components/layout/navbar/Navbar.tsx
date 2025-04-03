@@ -2,23 +2,16 @@
 
 import { useAuth } from "@/hooks/auth";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import Logo from "../../shared/Logo";
 import NavLink from "./NavLink";
 import Button from "../../ui/Button";
 import EditUserDialog from "@/components/forms/EditAccountForm";
-import { useState } from "react";
-import { useHandleScroll } from "@/hooks/scroll";
 import Menu from "../menu/Menu";
 import { useNavClick } from "@/hooks/useNavClick";
 import LoadingOverlay from "../LoadingOverlay";
 
 export default function Navbar() {
-  const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth({ middleware: "auth" });
-  const scrollToSection = useHandleScroll();
-  const pathname = usePathname();
-  const router = useRouter();
   const handleNavClick = useNavClick();
 
   if (user === undefined) {
@@ -59,11 +52,10 @@ export default function Navbar() {
         <div className="hidden sm:flex gap-x-sm items-center">
           <EditUserDialog user={user} />
           <Button
-            isLoading={loading}
             className="flex-0"
             variant="outline"
             onClick={() => {
-              logout({ setLoading });
+              logout();
             }}
           >
             Logout

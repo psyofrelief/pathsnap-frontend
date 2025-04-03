@@ -5,6 +5,7 @@ import Section from "@/components/ui/Section";
 import { useLinks } from "@/hooks/links";
 import LinkCard from "./components/LinkCard";
 import LoadingOverlay from "@/components/layout/LoadingOverlay";
+import { Link } from "./components/LinkCard"; // Import the Link type
 
 export default function LinksPage() {
   const { links, isLoading } = useLinks();
@@ -15,7 +16,7 @@ export default function LinksPage() {
   if (!links || links.length === 0) {
     return (
       <Section className="bg-radial min-h-screen-minus-navbar gap-sm items-center justify-center from-accent/20 to-background via-background">
-        <Brief>You don't have any links!</Brief>
+        <Brief>You don&apos;t have any links!</Brief>
         <CreateLinkDialog />
       </Section>
     );

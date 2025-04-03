@@ -40,8 +40,9 @@ export default function ForgotPasswordPage() {
   function onSubmit(values: { email: string }) {
     forgotPassword({
       email: values.email,
-      setErrors: (errors) => {
+      setErrors: (errors: any) => {
         if (typeof errors === "object" && errors !== null) {
+          // biome-ignore lint/complexity/noForEach: <explanation>
           Object.entries(errors).forEach(([key, message]) => {
             setError(key as keyof typeof values, { message: String(message) });
           });
@@ -57,7 +58,7 @@ export default function ForgotPasswordPage() {
       <header className="flex flex-col items-center">
         <Brief>Forgot your password?</Brief>
         <p>
-          No problem. Enter your email below, and we'll send you a password
+          No problem. Enter your email below, and we&apos;ll send you a password
           reset link.
         </p>
       </header>
