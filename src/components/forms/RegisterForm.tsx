@@ -40,13 +40,6 @@ const formSchema = z.object({
     .nonempty({ message: "Password confirmation is required." }),
 });
 
-interface ApiErrors {
-  name?: string;
-  email?: string;
-  password?: string;
-  password_confirmation?: string;
-}
-
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const {
@@ -73,17 +66,20 @@ export default function RegisterForm() {
     registerUser({
       ...values,
       setLoading,
-      setErrors: (apiErrors: ApiErrors) => {
+      setErrors: (apiErrors) => {
         if (apiErrors.name)
-          setError("name", { type: "server", message: apiErrors.name });
+          setError("name", { type: "server", message: apiErrors.name[0] });
         if (apiErrors.email)
-          setError("email", { type: "server", message: apiErrors.email });
+          setError("email", { type: "server", message: apiErrors.email[0] });
         if (apiErrors.password)
-          setError("password", { type: "server", message: apiErrors.password });
+          setError("password", {
+            type: "server",
+            message: apiErrors.password[0],
+          });
         if (apiErrors.password_confirmation)
           setError("password_confirmation", {
             type: "server",
-            message: apiErrors.password_confirmation,
+            message: apiErrors.password_confirmation[0],
           });
       },
       setStatus: () => {},

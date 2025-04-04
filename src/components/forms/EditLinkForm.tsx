@@ -48,6 +48,7 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
     reset,
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -66,17 +67,34 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
     });
   }, [link, reset]);
 
-  // Use the inferred type for values
   function onSubmit(values: FormValues) {
     const valuesObject = {
       title: values.title || undefined,
       short_url: values.shortLink || undefined,
       url: values.destinationUrl,
     };
+
     updateLink({
       id: link.id,
       updatedData: valuesObject,
       setLoading: setUpdateLoading,
+      setErrors: (apiErrors) => {
+        if (apiErrors.title) {
+          setError("title", { type: "server", message: apiErrors.title[0] });
+        }
+        if (apiErrors.shortLink) {
+          setError("shortLink", {
+            type: "server",
+            message: apiErrors.shortLink[0],
+          });
+        }
+        if (apiErrors.destinationUrl) {
+          setError("destinationUrl", {
+            type: "server",
+            message: apiErrors.destinationUrl[0],
+          });
+        }
+      },
     });
     setOpen(false);
   }
@@ -142,7 +160,11 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
             <Button
               isLoading={deleteLoading}
               onClick={() =>
-                deleteLink({ id: link.id, setLoading: setDeleteLoading })
+                deleteLink({
+                  id: link.id,
+                  setLoading: setDeleteLoading,
+                  setErrors: () => {},
+                })
               }
               variant="destructive"
               className="w-full"

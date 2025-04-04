@@ -19,6 +19,9 @@ interface AuthFunctionProps {
   setLoading: (loading: boolean) => void;
   setStatus: (status: string | null) => void;
   remember?: boolean;
+  email?: string;
+  password?: string;
+  password_confirmation?: string;
 }
 
 export const useAuth = ({
@@ -29,25 +32,38 @@ export const useAuth = ({
   const router = useRouter();
   const params = useParams();
 
+  const csrf = () => axios.get("/sanctum/csrf-cookie");
+
   const {
     data: user,
     error,
     mutate,
   } = useSWR("/api/user", async () => {
     try {
+      // If the user is undefined (no session data), start the loading state
       if (user === undefined) {
         setIsLoading(true);
       }
+
+      // Check if CSRF token is available in cookies (if it's already fetched previously)
+      const csrfToken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("XSRF-TOKEN"))
+        ?.split("=")[1];
+
+      // If the CSRF token is not set, fetch it
+      if (!csrfToken) {
+        await axios.get("/sanctum/csrf-cookie");
+      }
+
+      // Now proceed to fetch the user data
       const res = await axios.get("/api/user");
       return Object.keys(res.data).length ? res.data : null;
     } catch (error: unknown) {
-      // Specify 'unknown' here
       if (error instanceof AxiosError) {
-        // Type narrowing
         if (error.response?.status !== 409) throw error;
         router.push("/verify-email");
       } else {
-        // Handle unexpected errors here
         console.error("Unexpected error:", error);
       }
     } finally {
@@ -55,16 +71,14 @@ export const useAuth = ({
     }
   });
 
-  const csrf = () => axios.get("/sanctum/csrf-cookie");
-
   const forgotPassword = async ({
     setErrors,
     setLoading,
     setStatus,
     email,
   }: AuthFunctionProps & { email: string }) => {
-    setLoading(true);
     await csrf();
+    setLoading(true);
 
     setErrors({});
     setStatus(null);
@@ -132,19 +146,24 @@ export const useAuth = ({
     window.location.pathname = "/login";
   };
 
-  const updateUser = async ({ setLoading, ...values }: AuthFunctionProps) => {
+  interface UpdateUserProps extends AuthFunctionProps {
+    name: string;
+  }
+  const updateUser = async ({
+    setLoading,
+    setErrors,
+    name,
+  }: UpdateUserProps) => {
     setLoading(true);
     await csrf();
-    try {
-      const response = await axios.put("/api/user", values);
-      mutate();
-      return response.data;
-    } catch (error) {
-      console.error("Error updating user:", error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
+    axios
+      .put("/api/user", name)
+      .then(() => mutate())
+      .catch((error) => {
+        setErrors(error.response.data.errors);
+        if (error.response.status !== 422) throw error;
+      })
+      .finally(() => setLoading(false));
   };
 
   const deleteUser = async ({ setLoading }: AuthFunctionProps) => {
@@ -167,10 +186,10 @@ export const useAuth = ({
 
     ...props
   }: AuthFunctionProps) => {
+    await csrf();
     setLoading(true);
     setErrors({});
 
-    await csrf();
     axios
       .post("/register", props)
       .then(() => {
@@ -194,7 +213,6 @@ export const useAuth = ({
     setLoading(true);
     setErrors({});
     setStatus(null);
-    console.log(1);
 
     await csrf();
     axios
@@ -202,6 +220,7 @@ export const useAuth = ({
       .then(() => mutate())
       .catch((error) => {
         setErrors(error.response.data.errors);
+        console.log(error);
         if (error.response.status !== 422) throw error;
       })
       .finally(() => setLoading(false));

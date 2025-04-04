@@ -7,7 +7,6 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import Link from "next/link";
 import { useAuth } from "@/hooks/auth";
-
 import FormMessage from "../ui/FormMessage";
 import Checkbox from "../ui/Checkbox";
 
@@ -30,27 +29,27 @@ export default function LoginForm() {
   });
 
   const [loading, setLoading] = useState(false);
-
   const [shouldRemember, setShouldRemember] = useState(false);
   const { login } = useAuth({
     middleware: "guest",
     redirectIfAuthenticated: "/",
   });
 
-  interface ApiErrors {
-    email?: string;
-    password?: string;
-  }
-
   function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     login({
       ...values,
       setLoading,
-      setErrors: (apiErrors: ApiErrors) => {
-        if (apiErrors.email)
-          setError("email", { type: "server", message: apiErrors.email });
-        if (apiErrors.password)
-          setError("password", { type: "server", message: apiErrors.password });
+      setErrors: (apiErrors) => {
+        if (apiErrors.email) {
+          setError("email", { type: "server", message: apiErrors.email[0] });
+        }
+        if (apiErrors.password) {
+          setError("password", {
+            type: "server",
+            message: apiErrors.password[0],
+          });
+        }
       },
       remember: shouldRemember,
       setStatus: () => {},

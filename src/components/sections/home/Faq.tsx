@@ -16,7 +16,7 @@ export default function Faq() {
     >
       <header className="flex flex-col items-center">
         <Brief>Frequently Asked Questions</Brief>
-        <p>What would you like to know about Pzag?</p>
+        <p>What would you like to know about PathSnap?</p>
       </header>
       <Accordion
         type="single"

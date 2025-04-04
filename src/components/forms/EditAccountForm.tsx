@@ -59,11 +59,16 @@ export default function EditUserDialog({
     });
   }, [user, reset]);
 
-  function onSubmit(values: FormValues) {
+  async function onSubmit(values: FormValues) {
     if (isDeleteClicked) {
       return;
     }
-    updateUser({ name: values.name, setLoading: setUpdateLoading });
+    await updateUser({
+      name: values.name,
+      setLoading: setUpdateLoading,
+      setErrors: () => {},
+      setStatus: () => {},
+    });
     setOpen(false);
     toast("Account updated successfully");
   }
@@ -77,7 +82,11 @@ export default function EditUserDialog({
   }
 
   function confirmDelete() {
-    deleteUser({ setLoading: setDeleteLoading });
+    deleteUser({
+      setLoading: setDeleteLoading,
+      setErrors: () => {},
+      setStatus: () => {},
+    });
     setOpen(false);
   }
 

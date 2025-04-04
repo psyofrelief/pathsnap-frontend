@@ -10,14 +10,14 @@ export default function Hero() {
         <Brief>Take full control over your links</Brief>
         <p className="text-center max-w-[450px]">
           Need trackable QR codes and shorter links? Create, modify and monitor
-          your URLs in a matter of seconds with Pzag.
+          your URLs in a matter of seconds with PathSnap.
         </p>
         <div className="flex gap-sm">
           <Link href={"/register"} className="flex-1 flex mt-md">
             <Button>Get started</Button>
           </Link>
           <Link
-            href={"https://github.com/psyofrelief/pzag-frontend"}
+            href={"https://github.com/psyofrelief/pathsnap-frontend"}
             className="flex-1 flex mt-md"
           >
             <Button variant="outline">Source Code</Button>

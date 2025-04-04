@@ -35,7 +35,7 @@ const nacelle = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pzag",
+  title: "PathSnap",
   description: "A link shortener",
 };
 

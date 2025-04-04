@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
                 <p>
                   <strong>Company</strong> (referred to as either &quot;the
                   Company&quot;, &quot;We&quot;, &quot;Us&quot; or
-                  &quot;Our&quot; in this Agreement) refers to Pzag.
+                  &quot;Our&quot; in this Agreement) refers to PathSnap.
                 </p>
               </li>
               <li>
@@ -111,7 +111,7 @@ export default function PrivacyPolicy() {
               </li>
               <li>
                 <p>
-                  <strong>Website</strong> refers to Pzag, accessible from{" "}
+                  <strong>Website</strong> refers to PathSnap, accessible from{" "}
                   <a
                     href="https://pz.ag"
                     rel="external nofollow noopener noreferrer"

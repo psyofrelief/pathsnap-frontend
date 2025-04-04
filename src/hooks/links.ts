@@ -3,7 +3,9 @@ import type { Link } from "@/types/link";
 import useSWR from "swr";
 
 interface LinkData {
-  original_url: string;
+  title?: string;
+  short_url?: string;
+  url: string;
 }
 
 interface UpdateLinkData {
@@ -15,8 +17,14 @@ interface DeleteLinkData {
   id: string;
 }
 
-interface LoadingProps {
+interface AuthError {
+  [key: string]: string[];
+}
+interface LinkFunctionProps {
   setLoading: (loading: boolean) => void;
+  setErrors: (errors: AuthError) => void;
+  onSuccess?: () => void; // Added onSuccess callback
+  onError?: () => void; // Added onError callback
 }
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -33,45 +41,54 @@ export const useLinks = () => {
   const createLink = async ({
     linkData,
     setLoading,
-  }: { linkData: LinkData } & LoadingProps) => {
+    setErrors,
+  }: { linkData: LinkData } & LinkFunctionProps) => {
     setLoading(true);
-    try {
-      const response = await axios.post<Link>("/api/short-links", linkData);
-      await mutate();
-      return response.data;
-    } catch (err) {
-      console.error("Error creating link:", err);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
+
+    setErrors({});
+
+    axios
+      .post("/api/short-links", linkData)
+      .then((response) => {
+        mutate();
+        return response.data;
+      })
+      .catch((error) => {
+        if (error.response.status !== 422) throw error;
+        setErrors(error.response.data.errors);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const updateLink = async ({
     id,
     updatedData,
     setLoading,
-  }: UpdateLinkData & LoadingProps) => {
+    setErrors,
+  }: UpdateLinkData & LinkFunctionProps) => {
+    setErrors({});
     setLoading(true);
-    try {
-      const response = await axios.put<Link>(
-        `/api/short-links/${id}`,
-        updatedData,
-      );
-      await mutate();
-      return response.data;
-    } catch (err) {
-      console.error("Error updating link:", err);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
+    axios
+      .post(`/api/short-links/${id}`, updatedData)
+      .then((response) => {
+        mutate();
+        return response.data;
+      })
+      .catch((error) => {
+        if (error.response.status !== 422) throw error;
+        setErrors(error.response.data.errors);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const deleteLink = async ({
     id,
     setLoading,
-  }: DeleteLinkData & LoadingProps) => {
+  }: DeleteLinkData & LinkFunctionProps) => {
     setLoading(true);
     try {
       await axios.delete(`/api/short-links/${id}`);

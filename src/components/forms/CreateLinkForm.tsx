@@ -17,38 +17,67 @@ import FormMessage from "../ui/FormMessage";
 
 const formSchema = z.object({
   title: z.string().optional(),
-  shortLink: z
+  short_url: z
     .string()
     .min(2, { message: "Short code must be minimum 2 characters" })
     .optional(),
-  destinationUrl: z.string().url({ message: "Enter a valid URL" }),
+  url: z.string().url({ message: "Enter a valid URL" }),
 });
 
 export default function CreateLinkDialog() {
   const { createLink } = useLinks();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
     reset,
   } = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { title: "", shortLink: "", destinationUrl: "" },
+    defaultValues: { title: "", short_url: "", url: "" },
   });
 
-  function onSubmit(values) {
+  type FormValues = z.infer<typeof formSchema>;
+
+  function onSubmit(values: FormValues) {
     const linkData = {
-      url: values.destinationUrl,
+      url: values.url,
       title: values.title || undefined,
-      short_url: values.shortLink || undefined,
+      short_url: values.short_url || undefined,
     };
 
-    createLink({ linkData, setLoading });
-    console.log(linkData);
-    reset();
-    setOpen(false);
+    setLoading(true);
+    createLink({
+      linkData,
+      setLoading,
+      setErrors: (apiErrors) => {
+        if (apiErrors.title) {
+          setError("title", { type: "server", message: apiErrors.title[0] });
+        }
+        if (apiErrors.short_url) {
+          setError("short_url", {
+            type: "server",
+            message: apiErrors.short_url[0],
+          });
+        }
+        if (apiErrors.url) {
+          setError("url", {
+            type: "server",
+            message: apiErrors.url[0],
+          });
+        }
+      },
+      onSuccess: () => {
+        setOpen(false);
+        reset();
+      },
+      onError: () => {
+        setLoading(false);
+      },
+    });
   }
 
   return (
@@ -74,26 +103,24 @@ export default function CreateLinkDialog() {
             {errors.title && <FormMessage>{errors.title.message}</FormMessage>}
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="shortLink">Custom Short Link (Optional)</Label>
+            <Label htmlFor="short_url">Custom Short Link (Optional)</Label>
             <Input
-              id="shortLink"
+              id="short_url"
               placeholder="Enter custom short link"
-              {...register("shortLink")}
+              {...register("short_url")}
             />
-            {errors.shortLink && (
-              <FormMessage>{errors.shortLink.message}</FormMessage>
+            {errors.short_url && (
+              <FormMessage>{errors.short_url.message}</FormMessage>
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="destinationUrl">Destination URL</Label>
+            <Label htmlFor="url">Destination URL</Label>
             <Input
-              id="destinationUrl"
+              id="url"
               placeholder="https://example.com"
-              {...register("destinationUrl")}
+              {...register("url")}
             />
-            {errors.destinationUrl && (
-              <FormMessage>{errors.destinationUrl.message}</FormMessage>
-            )}
+            {errors.url && <FormMessage>{errors.url.message}</FormMessage>}
           </div>
           <Button isLoading={loading} type="submit" className="w-full">
             {loading ? "Creating..." : "Create link"}

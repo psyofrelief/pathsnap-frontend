@@ -12,12 +12,14 @@ import FormMessage from "../ui/FormMessage";
 import { useSupportEmail } from "@/hooks/useSupportEmail";
 
 const formSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().email({ message: "Enter a valid email" }),
   message: z
     .string()
     .min(10, { message: "Message must be more than 10 characters" }),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
   const { sendSupportEmail, loading, status } = useSupportEmail();
@@ -26,19 +28,17 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  function onSubmit(values) {
-    const formData = {
-      message: values.message,
+  function onSubmit(values: FormValues) {
+    sendSupportEmail({
+      name: values.name,
       email: values.email,
-      name: values.name || undefined,
-    };
-
-    sendSupportEmail(formData);
+      message: values.message,
+    });
 
     reset();
   }
@@ -48,12 +48,15 @@ export default function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-1 bg-background flex-col w-full border border-outline p-md max-w-[800px] gap-y-4"
     >
-      <div className="flex flex-col gap-2">
+      {/* Name Field */}
+      <div className="flex flex-col gap-y-xs">
         <Label htmlFor="name">Name</Label>
         <Input id="name" placeholder="John Appleseed" {...register("name")} />
         {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
       </div>
-      <div className="flex flex-col gap-2">
+
+      {/* Email Field */}
+      <div className="flex flex-col gap-y-xs">
         <Label htmlFor="email">Email</Label>
         <Input
           type="email"
@@ -63,7 +66,9 @@ export default function ContactForm() {
         />
         {errors.email && <FormMessage>{errors.email.message}</FormMessage>}
       </div>
-      <div className="flex flex-col gap-2">
+
+      {/* Message Field */}
+      <div className="flex flex-col gap-y-xs">
         <Label htmlFor="message">Your message</Label>
         <TextArea
           id="message"
@@ -72,7 +77,10 @@ export default function ContactForm() {
         />
         {errors.message && <FormMessage>{errors.message.message}</FormMessage>}
       </div>
+
+      {/* Success Message */}
       {status && <p className="text-foreground-success mx-auto">{status}</p>}
+
       <Button isLoading={loading} type="submit" className="w-full">
         Send Message
       </Button>
