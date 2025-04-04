@@ -12,7 +12,7 @@ export default function RootLayout({
     <>
       <Image
         className="fixed inset-0 w-full z-[0]"
-        src={"/images/background.png"}
+        src={"/images/background.webp"}
         height={1920}
         width={1080}
         alt="background"

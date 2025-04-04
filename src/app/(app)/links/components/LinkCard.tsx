@@ -54,7 +54,7 @@ export default function LinkCard({ link }: LinkProps) {
             width={48}
             height={48}
             className="size-[48px] aspect-square rounded"
-            onError={() => setFaviconSrc("/images/fallback_icon.png")}
+            onError={() => setFaviconSrc("/images/fallback_icon.webp")}
           />
           <header className="flex flex-col gap-y-xs">
             {title && <p className="leading-none">{title}</p>}
