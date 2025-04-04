@@ -6,16 +6,7 @@ import ArrowDownRightIcon from "@/components/icons/ArrowDownRight";
 import { toast } from "sonner";
 import EditLinkDialog from "@/components/forms/EditLinkForm";
 import QrCodeDialog from "@/app/(app)/links/components/QrCodeDialog";
-
-export interface Link {
-  id: string;
-  title?: string;
-  short_url: string;
-  url: string;
-  qr_code: string;
-  clicks: number;
-  created_at: string;
-}
+import type { Link } from "@/types/link";
 
 interface LinkProps {
   link: Link;

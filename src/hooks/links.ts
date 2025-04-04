@@ -1,15 +1,6 @@
 import axios from "@/lib/axios";
+import type { Link } from "@/types/link";
 import useSWR from "swr";
-
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
-interface Link {
-  id: string;
-  original_url: string;
-  short_url: string;
-  created_at: string;
-  updated_at: string;
-}
 
 interface LinkData {
   original_url: string;
@@ -28,12 +19,14 @@ interface LoadingProps {
   setLoading: (loading: boolean) => void;
 }
 
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+
 export const useLinks = () => {
   const {
     data: links,
     error,
     mutate,
-  } = useSWR<Link[]>("/api/short-links", fetcher);
+  } = useSWR<Link[]>("/api/short-links", fetcher); // Use the updated Link type here
 
   const isLoading = !links && !error;
 

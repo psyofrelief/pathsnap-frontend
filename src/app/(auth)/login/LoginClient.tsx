@@ -2,7 +2,6 @@
 
 import LoginForm from "@/components/forms/LoginForm";
 import Link from "next/link";
-import { useAuth } from "@/hooks/auth";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import AuthSessionStatus from "@/components/ui/AuthSessionStatus";
@@ -18,7 +17,6 @@ export default function Login() {
     if (searchParams.has("reset")) {
       setStatus("Password has been reset, please login.");
     }
-    console.log(searchParams.has("reset"));
   }, [searchParams]);
 
   return (

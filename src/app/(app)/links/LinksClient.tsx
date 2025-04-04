@@ -5,6 +5,7 @@ import Section from "@/components/ui/Section";
 import { useLinks } from "@/hooks/links";
 import LinkCard from "./components/LinkCard";
 import LoadingOverlay from "@/components/layout/LoadingOverlay";
+import type { Link } from "@/types/link";
 
 export default function LinksClient() {
   const { links, isLoading } = useLinks();
@@ -31,7 +32,7 @@ export default function LinksClient() {
       </div>
 
       <ul className="flex flex-col gap-y-md items-center">
-        {links.map((link: any) => (
+        {links.map((link: Link) => (
           <LinkCard key={link.id} link={link} />
         ))}
       </ul>

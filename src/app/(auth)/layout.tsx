@@ -1,6 +1,4 @@
 import Link from "next/link";
-import AuthCard from "@/app/(auth)/AuthCard";
-import ApplicationLogo from "@/components/ApplicationLogo";
 import Logo from "@/components/shared/Logo";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 

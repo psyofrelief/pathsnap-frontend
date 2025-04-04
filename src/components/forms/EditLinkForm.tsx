@@ -36,6 +36,9 @@ const formSchema = z.object({
   destinationUrl: z.string().url({ message: "Enter a valid URL" }),
 });
 
+// Inferred type for the form values based on the schema
+type FormValues = z.infer<typeof formSchema>;
+
 export default function EditLinkDialog({ link }: EditLinkDialogProps) {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -46,7 +49,7 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: link.title || "",
@@ -63,7 +66,8 @@ export default function EditLinkDialog({ link }: EditLinkDialogProps) {
     });
   }, [link, reset]);
 
-  function onSubmit(values: any) {
+  // Use the inferred type for values
+  function onSubmit(values: FormValues) {
     const valuesObject = {
       title: values.title || undefined,
       short_url: values.shortLink || undefined,

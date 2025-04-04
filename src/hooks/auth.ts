@@ -3,6 +3,8 @@ import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
+import { AxiosError } from "axios";
+
 interface AuthProps {
   middleware?: "auth" | "guest";
   redirectIfAuthenticated?: string;
@@ -38,9 +40,16 @@ export const useAuth = ({
       }
       const res = await axios.get("/api/user");
       return Object.keys(res.data).length ? res.data : null;
-    } catch (error: any) {
-      if (error.response?.status !== 409) throw error;
-      router.push("/verify-email");
+    } catch (error: unknown) {
+      // Specify 'unknown' here
+      if (error instanceof AxiosError) {
+        // Type narrowing
+        if (error.response?.status !== 409) throw error;
+        router.push("/verify-email");
+      } else {
+        // Handle unexpected errors here
+        console.error("Unexpected error:", error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -105,7 +114,7 @@ export const useAuth = ({
   const resendEmailVerification = ({
     setStatus,
     setLoading,
-  }: AuthFunctionProps) => {
+  }: Omit<AuthFunctionProps, "setErrors">) => {
     setStatus(null);
     setLoading(true);
     axios

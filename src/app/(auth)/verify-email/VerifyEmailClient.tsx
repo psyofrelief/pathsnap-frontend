@@ -7,7 +7,7 @@ import { useAuth } from "@/hooks/auth";
 import { useState } from "react";
 
 export default function VerifyEmail() {
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const { logout, resendEmailVerification } = useAuth({
     middleware: "auth",
@@ -21,7 +21,7 @@ export default function VerifyEmail() {
         <p className="text-center max-w-[700px]">
           Thanks for signing up! Before getting started, could you verify your
           email address by clicking on the link we just emailed to you? If you
-          didn't receive the email, we will gladly send you another.
+          didn&apos;t receive the email, we will gladly send you another.
         </p>
       </header>
 
@@ -34,7 +34,9 @@ export default function VerifyEmail() {
 
       <div className="grid grid-cols-1 sm:w-fit w-full sm:grid-cols-2 gap-sm">
         <Button
-          onClick={() => resendEmailVerification({ setStatus, setLoading })}
+          onClick={() => {
+            resendEmailVerification({ setStatus, setLoading });
+          }}
           isLoading={loading}
           className="w-full flex-1"
         >
@@ -45,7 +47,7 @@ export default function VerifyEmail() {
           type="button"
           variant="outline"
           className="w-full"
-          onClick={() => logout({ setLoading })}
+          onClick={() => logout()}
         >
           Logout
         </Button>

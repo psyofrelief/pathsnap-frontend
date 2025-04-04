@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -37,10 +35,15 @@ export default function ForgotPasswordPage() {
 
   const [status, setStatus] = useState<string | null>(null);
 
+  // Define a type for the errors parameter based on the form schema
+  interface FormErrors {
+    email?: string;
+  }
+
   function onSubmit(values: { email: string }) {
     forgotPassword({
       email: values.email,
-      setErrors: (errors: any) => {
+      setErrors: (errors: FormErrors) => {
         if (typeof errors === "object" && errors !== null) {
           // biome-ignore lint/complexity/noForEach: <explanation>
           Object.entries(errors).forEach(([key, message]) => {
