@@ -13,16 +13,8 @@ export default function Footer() {
       </div>
 
       <ul className="flex items-center gap-sm">
-        {footerLinks.map((e) => (
-          <FooterLink label={e.label} href={e.href} key={e.href} />
-        ))}
+        <FooterLink label="Privacy policy" href={"/privacy-policy"} />
       </ul>
     </footer>
   );
 }
-
-const footerLinks = [
-  { label: "Terms Of Use", href: "/terms-of-use" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Cookie Policy", href: "/cookie-policy" },
-];
