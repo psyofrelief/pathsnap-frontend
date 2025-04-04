@@ -1,50 +1,15 @@
-"use client";
+import dynamic from "next/dynamic";
 
-import Link from "next/link";
-import { useAuth } from "@/hooks/auth";
-import { useState } from "react";
-import RegisterForm from "@/components/forms/RegisterForm";
-import Brief from "@/components/ui/Brief";
-import Section from "@/components/ui/Section";
+const RegisterPage = dynamic(() => import("./RegisterClient"));
 
-const Page = () => {
-  const { register } = useAuth({
-    middleware: "guest",
-    redirectIfAuthenticated: "/",
-  });
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errors, setErrors] = useState([]);
-
-  const submitForm = (event) => {
-    event.preventDefault();
-
-    register({
-      name,
-      email,
-      password,
-      password_confirmation: passwordConfirmation,
-      setErrors,
-    });
+export async function generateMetadata() {
+  const appName = process.env.NEXT_PUBLIC_APP_NAME || "App";
+  return {
+    title: `${appName} | Sign up`,
+    description: "Sign up for an account",
   };
+}
 
-  return (
-    <Section className="items-center justify-center flex-1 gap-y-sm sm:!py-md relative">
-      <Brief>Sign up for an account</Brief>
-      <RegisterForm />
-      <p className="z-[1]">
-        Already have an account?{" "}
-        <span>
-          <Link className="underline underline-offset-4" href={"/login"}>
-            Login
-          </Link>
-        </span>
-      </p>
-    </Section>
-  );
-};
-
-export default Page;
+export default function Register() {
+  return <RegisterPage />;
+}

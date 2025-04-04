@@ -185,6 +185,7 @@ export const useAuth = ({
     setLoading(true);
     setErrors({});
     setStatus(null);
+    console.log(1);
 
     await csrf();
     axios

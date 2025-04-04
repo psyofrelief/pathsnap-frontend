@@ -64,7 +64,10 @@ export default function RegisterForm() {
     },
   });
 
-  const { register: registerUser } = useAuth();
+  const { register: registerUser } = useAuth({
+    middleware: "guest",
+    redirectIfAuthenticated: "/",
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     registerUser({

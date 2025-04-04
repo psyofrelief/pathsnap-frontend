@@ -32,7 +32,10 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const [shouldRemember, setShouldRemember] = useState(false);
-  const { login } = useAuth();
+  const { login } = useAuth({
+    middleware: "guest",
+    redirectIfAuthenticated: "/",
+  });
 
   interface ApiErrors {
     email?: string;
