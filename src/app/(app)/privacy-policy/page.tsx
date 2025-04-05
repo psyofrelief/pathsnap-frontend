@@ -113,11 +113,12 @@ export default function PrivacyPolicy() {
                 <p>
                   <strong>Website</strong> refers to PathSnap, accessible from{" "}
                   <a
-                    href="https://pz.ag"
+                    href="https://p-s.co"
                     rel="external nofollow noopener noreferrer"
                     target="_blank"
+                    aria-label="Visit PathSnap"
                   >
-                    https://pz.ag
+                    https://p-s.co
                   </a>
                 </p>
               </li>
@@ -229,6 +230,7 @@ export default function PrivacyPolicy() {
                 href="https://www.termsfeed.com/blog/cookies/#What_Are_Cookies"
                 rel="noreferrer"
                 target="_blank"
+                aria-label="Learn more about cookies"
               >
                 TermsFeed website
               </a>{" "}
@@ -605,6 +607,7 @@ export default function PrivacyPolicy() {
                   href="/cdn-cgi/l/email-protection"
                   className="__cf_email__"
                   data-cfemail="34025255465d5150745359555d581a575b59"
+                  aria-label="Email us"
                 >
                   [email&#160;protected]
                 </a>
@@ -614,11 +617,12 @@ export default function PrivacyPolicy() {
               <p>
                 By visiting this page on our website:{" "}
                 <a
-                  href="https://pz.ag/support"
+                  href="https://p-s.co/support"
                   rel="external nofollow noopener noreferrer"
                   target="_blank"
+                  aria-label="Visit PathSnap support page"
                 >
-                  https://pz.ag/support
+                  https://p-s.co/support
                 </a>
               </p>
             </li>

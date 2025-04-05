@@ -16,12 +16,15 @@ export default function Hero() {
           <Link href={"/register"} className="flex-1 flex mt-md">
             <Button>Get started</Button>
           </Link>
-          <Link
+          <a
             href={"https://github.com/psyofrelief/pathsnap-frontend"}
             className="flex-1 flex mt-md"
+            rel="noreferrer noopener"
+            target="_blank"
+            aria-label="View the source code for this website"
           >
             <Button variant="outline">Source Code</Button>
-          </Link>
+          </a>
         </div>
       </header>
     </Section>

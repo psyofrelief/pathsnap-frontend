@@ -5,12 +5,7 @@ interface Props {
   className?: string;
 }
 const AuthSessionStatus = ({ status, className = "" }: Props) => (
-  <p
-    className={cn(
-      "mb-xs font-medium text-sm text-foreground-success",
-      className,
-    )}
-  >
+  <p className={cn("mb-xs font-medium text-foreground-success", className)}>
     {status}
   </p>
 );

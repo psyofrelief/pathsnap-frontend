@@ -56,6 +56,7 @@ export default function LinkCard({ link }: LinkProps) {
               href={url}
               rel="noreferrer"
               target="_blank"
+              aria-label={`Visit ${url}`}
               className="text-xs gap-x-1 flex items-center mt-[1px] text-foreground-secondary hover:underline"
             >
               <ArrowDownRightIcon />

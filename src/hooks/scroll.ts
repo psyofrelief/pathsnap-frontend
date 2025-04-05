@@ -7,7 +7,7 @@ export function useHandleScroll(): (id: string) => void {
   const spring = useSpring(0, { damping: 57, stiffness: 900 });
 
   useLayoutEffect(() => {
-    const unsubscribe = spring.onChange((latest: number) => {
+    const unsubscribe = spring.on("change", (latest: number) => {
       window.scrollTo(0, latest);
     });
 

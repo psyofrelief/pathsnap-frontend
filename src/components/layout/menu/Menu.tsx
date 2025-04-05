@@ -35,8 +35,11 @@ export default function Menu() {
         <MenuNavLink onClick={closeDrawer} label="Home" href="/" />
         <MenuNavLink
           onClick={(e) => {
-            handleNavClick(e);
+            e.preventDefault();
             closeDrawer();
+            setTimeout(() => {
+              handleNavClick(e);
+            }, 500);
           }}
           label="FAQ"
           href="/#faq"

@@ -15,6 +15,7 @@ export default function RootLayout({
         src={"/images/background.webp"}
         height={1920}
         width={1080}
+        priority
         alt="background"
       />
       <Toaster />

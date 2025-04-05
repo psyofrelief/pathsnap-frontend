@@ -3,7 +3,7 @@ import Logo from "@/components/shared/Logo";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 
 export const metadata = {
-  title: "Laravel",
+  title: process.env.NEXT_PUBLIC_APP_NAME,
 };
 
 export default function Layout({
