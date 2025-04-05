@@ -17,7 +17,7 @@ export default function Hero() {
             <Button>Get started</Button>
           </Link>
           <a
-            href={"https://github.com/psyofrelief/pathsnap-frontend"}
+            href={"https://github.com/psyofrelief/pathsnap"}
             className="flex-1 flex mt-md"
             rel="noreferrer noopener"
             target="_blank"
