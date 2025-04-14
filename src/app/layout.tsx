@@ -1,37 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const lastik = localFont({
-  src: [
-    {
-      path: "../../public/fonts/lastik/Lastik-Regular.otf",
-      style: "normal",
-    },
-  ],
-  variable: "--font-lastik",
-  display: "swap",
-});
-const nacelle = localFont({
-  src: [
-    {
-      path: "../../public/fonts/nacelle/Nacelle-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "/../../public/fonts/nacelle/Nacelle-SemiBold.otf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "/../../public/fonts/nacelle/Nacelle-Bold.otf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-nacelle",
-  display: "swap",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -47,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nacelle.variable} ${lastik.variable} antialiased relative min-h-screen flex flex-col bg-background`}
+        className={`${dmSans.variable} antialiased relative min-h-screen flex flex-col bg-background`}
       >
         {children}
       </body>

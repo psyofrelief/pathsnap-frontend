@@ -19,8 +19,11 @@ const formSchema = z.object({
   title: z.string().optional(),
   short_url: z
     .string()
-    .min(2, { message: "Short code must be minimum 2 characters" })
-    .optional(),
+    .transform((val) => (val.trim() === "" ? undefined : val))
+    .optional()
+    .refine((val) => !val || val.length >= 2, {
+      message: "Short code must be minimum 2 characters",
+    }),
   url: z.string().url({ message: "Enter a valid URL" }),
 });
 
@@ -77,6 +80,9 @@ export default function CreateLinkDialog() {
       onError: () => {
         setLoading(false);
       },
+    }).then(() => {
+      setOpen(false);
+      reset();
     });
   }
 

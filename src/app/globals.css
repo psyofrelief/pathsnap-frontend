@@ -30,8 +30,7 @@
   --spacing-screen-minus-navbar: calc(100vh - 74px);
   --spacing-screen-minus-navbar-mobile: calc(100vh - 64px);
 
-  --font-sans: var(--font-nacelle);
-  --font-lastik: var(--font-lastik);
+  --font-sans: var(--font-dm-sans);
 }
 
 :root {
@@ -52,7 +51,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Nacelle", Arial, sans-serif;
+  font-family: "Dm Sans", Arial, sans-serif;
 }
 
 .loader {
