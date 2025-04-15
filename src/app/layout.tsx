@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
@@ -25,6 +25,7 @@ export default function RootLayout({
         className={`${dmSans.variable} antialiased relative min-h-screen flex flex-col bg-background`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
