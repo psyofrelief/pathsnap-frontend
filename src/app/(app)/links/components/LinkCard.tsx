@@ -50,7 +50,7 @@ export default function LinkCard({ link }: LinkProps) {
           <header className="flex flex-col gap-y-xs">
             {title && <p className="leading-none">{title}</p>}
             <p className="whitespace-nowrap leading-none">
-              pz.ag/<span className="font-semibold">{short_url}</span>
+              q.p-s.co/<span className="font-semibold">{short_url}</span>
             </p>
             <a
               href={url}
