@@ -7,7 +7,7 @@ interface Props {
 
 export default function Brief({ children, className = "" }: Props) {
   return (
-    <p className={cn("text-md sm:text-lg font-medium", className)}>
+    <p className={cn("text-md font-display sm:text-lg font-medium", className)}>
       {children}
     </p>
   );

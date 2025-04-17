@@ -31,6 +31,7 @@
   --spacing-screen-minus-navbar-mobile: calc(100vh - 64px);
 
   --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-playfair-display);
 }
 
 :root {

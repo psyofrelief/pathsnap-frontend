@@ -32,8 +32,8 @@ export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
           <QrCodeIcon />
         </LinkCardButton>
       </DialogTrigger>
-      <DialogContent className="w-fit items-center flex flex-col">
-        <Pill>{`${backendUrl}/${shortUrl}`}</Pill>
+      <DialogContent className=" items-center w-full sm:max-w-[400px] max-w-[320px] rounded  flex flex-col">
+        <Pill className="w-fit">{`q.p-s.co/${shortUrl}`}</Pill>
         <DialogHeader>
           <DialogTitle className="font-lastik">Your QR Code</DialogTitle>
         </DialogHeader>

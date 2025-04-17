@@ -44,7 +44,7 @@ const DialogContent = ({
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-lg top-lg rounded opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-foreground-secondary">
+      <DialogPrimitive.Close className="absolute right-sm top-sm rounded opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-foreground-secondary">
         <XIcon />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

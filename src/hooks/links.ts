@@ -23,8 +23,7 @@ interface AuthError {
 interface LinkFunctionProps {
   setLoading: (loading: boolean) => void;
   setErrors: (errors: AuthError) => void;
-  onSuccess?: () => void; // Added onSuccess callback
-  onError?: () => void; // Added onError callback
+  onSuccess?: () => void;
 }
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -34,7 +33,7 @@ export const useLinks = () => {
     data: links,
     error,
     mutate,
-  } = useSWR<Link[]>("/api/short-links", fetcher); // Use the updated Link type here
+  } = useSWR<Link[]>("/api/short-links", fetcher);
 
   const isLoading = !links && !error;
 
@@ -71,7 +70,7 @@ export const useLinks = () => {
     setErrors({});
     setLoading(true);
     axios
-      .post(`/api/short-links/${id}`, updatedData)
+      .put(`/api/short-links/${id}`, updatedData)
       .then((response) => {
         mutate();
         return response.data;
