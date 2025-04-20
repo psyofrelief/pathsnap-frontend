@@ -20,8 +20,6 @@ export default function ShareDialog({ shortUrl, qrCodeUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
