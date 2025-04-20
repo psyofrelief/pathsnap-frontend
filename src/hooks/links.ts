@@ -24,6 +24,7 @@ interface LinkFunctionProps {
   setLoading: (loading: boolean) => void;
   setErrors: (errors: AuthError) => void;
   onSuccess?: () => void;
+  onError?: () => void;
 }
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
