@@ -15,18 +15,20 @@ export default function Hero() {
           Need trackable QR codes and shorter links? Create, modify and monitor
           your URLs in a matter of seconds with PathSnap.
         </p>
-        <div className="flex gap-sm">
-          <Link href={"/register"} className="flex-1 flex mt-md">
-            <Button>Get started</Button>
+        <div className="flex gap-md">
+          <Link href={"/register"} className="flex-1 flex">
+            <Button className="flex-1 size-full">Get started</Button>
           </Link>
           <a
             href={"https://github.com/psyofrelief/pathsnap"}
-            className="flex-1 flex mt-md"
+            className="flex-1 flex"
             rel="noreferrer noopener"
             target="_blank"
             aria-label="View the source code for this website"
           >
-            <Button variant="outline">Source Code</Button>
+            <Button variant="outline" className="flex-1 size-full">
+              Source Code
+            </Button>
           </a>
         </div>
       </header>

@@ -7,13 +7,13 @@ interface Props {
 
 export default function Pill({ children, className = "" }: Props) {
   return (
-    <p
+    <li
       className={cn(
         "bg-popover flex whitespace-nowrap justify-center items-center gap-1 rounded-full px-sm text-xs py-xs m-0 w-full sm:w-fit mx-auto",
         className,
       )}
     >
       {children}
-    </p>
+    </li>
   );
 }

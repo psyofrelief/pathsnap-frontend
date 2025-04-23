@@ -92,12 +92,13 @@ export default function EditUserDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <p
+      <DialogTrigger aria-label="Open Edit Account Form" asChild>
+        <button
+          type="button"
           className={`cursor-pointer  ${isMenu ? "flex-1 px-sm py-xs rounded transition-colors hover:bg-popover" : " hover:underline"}`}
         >
           Profile
-        </p>
+        </button>
       </DialogTrigger>
       <DialogContent className="max-w-[700px]">
         <DialogHeader>
