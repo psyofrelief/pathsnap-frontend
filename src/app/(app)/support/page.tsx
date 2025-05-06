@@ -12,7 +12,7 @@ export async function generateMetadata() {
 
 export default function SupportPage() {
   return (
-    <Section className="justify-center bg-radial from-accent/20 to-background via-background/50 items-center gap-y-lg">
+    <Section className="justify-center flex-1 bg-radial from-accent/20 to-background via-background/50 items-center gap-y-lg">
       <header className="flex flex-col items-center">
         <Brief className="text-center sm:max-w-full max-w-[230px]">
           Need assistance? Send us a message

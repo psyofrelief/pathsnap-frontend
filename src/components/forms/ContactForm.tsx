@@ -68,7 +68,7 @@ export default function ContactForm() {
       </div>
 
       {/* Message Field */}
-      <div className="flex flex-col gap-y-xs">
+      <div className="flex flex-col flex-1 gap-y-xs">
         <Label htmlFor="message">Your message</Label>
         <TextArea
           id="message"
@@ -81,7 +81,7 @@ export default function ContactForm() {
       {/* Success Message */}
       {status && <p className="text-foreground-success mx-auto">{status}</p>}
 
-      <Button isLoading={loading} type="submit" className="w-full">
+      <Button isLoading={loading} type="submit" className="w-full max-h-fit">
         Send Message
       </Button>
     </form>
